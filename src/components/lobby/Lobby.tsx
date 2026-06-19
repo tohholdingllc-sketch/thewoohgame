@@ -92,6 +92,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
 
   async function toggleDeck(id: string) {
     if (!isMaster) return;
+    if (decks.find((dk) => dk.id === id)?.is_premium) return; // mazzo bloccato (es. Streap)
     const next = selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id];
     setGame((g) => ({ ...g, selected_decks: next }));
     await supabase.from("games").update({ selected_decks: next }).eq("id", game.id);
@@ -225,6 +226,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
                     deck={deck}
                     selected={selected.includes(deck.id)}
                     onToggle={() => toggleDeck(deck.id)}
+                    disabled={deck.is_premium}
                     locale={locale}
                   />
                 ))}
