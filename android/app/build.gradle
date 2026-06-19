@@ -22,6 +22,7 @@ android {
             // Se le variabili non ci sono (build debug/locale), resta non firmata.
             if (System.getenv("CM_KEYSTORE_PATH")) {
                 storeFile file(System.getenv("CM_KEYSTORE_PATH"))
+                storeType "PKCS12"
                 storePassword System.getenv("CM_KEYSTORE_PASSWORD")
                 keyAlias System.getenv("CM_KEY_ALIAS")
                 keyPassword System.getenv("CM_KEY_PASSWORD")
