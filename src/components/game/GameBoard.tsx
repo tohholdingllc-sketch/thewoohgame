@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { wolfSrc, wolfForIndex } from "@/lib/wolves";
 import { cardTypeMeta, substituteTargets, type CardRow, type Target } from "@/lib/cards";
+import { getDict, cardTypeLabel } from "@/lib/i18n";
 import type { Game, I18n, Locale } from "@/lib/types";
 
 interface GameBoardProps {
@@ -27,6 +28,7 @@ export function GameBoard({
 }: GameBoardProps) {
   const [busy, setBusy] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const d = getDict(locale);
 
   const len = game.card_queue.length;
   const idx = game.current_card_index;
@@ -39,7 +41,6 @@ export function GameBoard({
     setBusy(false);
   }, [busy, isMaster, onAdvance]);
 
-  // Desktop: spazio / freccia / invio avanzano (solo master)
   useEffect(() => {
     if (!isMaster || ended) return;
     function onKey(e: KeyboardEvent) {
@@ -52,7 +53,6 @@ export function GameBoard({
     return () => window.removeEventListener("keydown", onKey);
   }, [isMaster, ended, doAdvance]);
 
-  // "i" piccola e grigia in alto a destra: c'è ma non disturba
   const infoButton = (
     <button
       type="button"
@@ -60,7 +60,7 @@ export function GameBoard({
         e.stopPropagation();
         setShowInfo((s) => !s);
       }}
-      aria-label="Info: gioco responsabile"
+      aria-label={d.infoLabel}
       className="absolute right-4 top-4 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 font-serif text-sm italic text-white/40"
     >
       i
@@ -75,14 +75,10 @@ export function GameBoard({
       }}
       className="absolute inset-0 z-20 flex items-center justify-center bg-night/85 px-8 text-center"
     >
-      <p className="max-w-sm text-ink-soft">
-        Gioca responsabilmente. Tutte le carte funzionano anche con bevande
-        analcoliche. Se bevi, non guidare. <span className="text-white">18+</span>
-      </p>
+      <p className="max-w-sm text-ink-soft">{d.disclaimerShort}</p>
     </div>
   ) : null;
 
-  // ---- Schermata di fine partita ----
   if (ended) {
     return (
       <main className="relative flex-1 flex flex-col items-center justify-center gap-7 px-6 py-10 pad-safe-t pad-safe-b text-center">
@@ -96,8 +92,8 @@ export function GameBoard({
           style={{ animation: "wooh-pop 0.5s ease-out" }}
         />
         <div>
-          <h1 className="font-display text-4xl text-white">Fine partita!</h1>
-          <p className="mt-1 text-ink-soft">Avete fatto WOOH fino in fondo 🍻</p>
+          <h1 className="font-display text-4xl text-white">{d.gameOver}</h1>
+          <p className="mt-1 text-ink-soft">{d.gameOverSub}</p>
         </div>
         <div className="flex w-full max-w-sm flex-col gap-3">
           {isMaster ? (
@@ -112,13 +108,13 @@ export function GameBoard({
                 setBusy(false);
               }}
             >
-              🔄 Rigioca
+              {d.playAgain}
             </Button>
           ) : (
-            <p className="text-ink-soft">In attesa del master…</p>
+            <p className="text-ink-soft">{d.waitMasterShort}</p>
           )}
           <button type="button" onClick={onExit} className="text-sm text-ink-faint underline underline-offset-4">
-            Esci
+            {d.exit}
           </button>
         </div>
       </main>
@@ -134,7 +130,7 @@ export function GameBoard({
     );
   }
 
-  const meta = cardTypeMeta(card.type);
+  const emoji = cardTypeMeta(card.type).emoji;
   const targets = (game.current_targets ?? []) as Target[];
   const text = substituteTargets(card.text[locale] ?? card.text.it, targets);
   const rule = (game.active_rules?.[0] as I18n | undefined) ?? undefined;
@@ -151,19 +147,16 @@ export function GameBoard({
       {infoButton}
       {infoOverlay}
 
-      {/* Badge regola persistente attiva */}
       {rule ? (
         <div className="mx-auto mb-3 max-w-md rounded-full border-2 border-violet bg-violet/20 px-4 py-1.5 text-center text-sm text-white">
           📜 {rule[locale] ?? rule.it}
         </div>
       ) : null}
 
-      {/* Progresso */}
       <div className="mb-2 text-center text-sm font-bold text-ink-faint">
         {idx + 1} / {len}
       </div>
 
-      {/* Carta a tutto schermo */}
       <div
         key={idx}
         className="flex flex-1 flex-col items-center justify-center gap-6 text-center"
@@ -178,29 +171,24 @@ export function GameBoard({
             style={{ animation: "wooh-pop 0.5s ease-out" }}
           />
         ) : (
-          <span className="text-6xl">{meta.emoji}</span>
+          <span className="text-6xl">{emoji}</span>
         )}
         <span className="rounded-full bg-surface-2 px-4 py-1 font-display text-sm uppercase tracking-widest text-ink-soft">
-          {meta.label}
+          {cardTypeLabel(d, card.type)}
         </span>
-        <p className="max-w-md font-display text-3xl leading-tight text-white sm:text-4xl">
-          {text}
-        </p>
+        <p className="max-w-md font-display text-3xl leading-tight text-white sm:text-4xl">{text}</p>
       </div>
 
-      {/* In basso: penalità WOOH (se salti la carta) + suggerimento tap */}
       <div className="mt-4 flex flex-col items-center gap-3">
         <div className="flex items-center gap-2 rounded-full bg-night/40 px-4 py-2">
           <span className="text-xl">🔥🔥</span>
           <span className="font-display text-lg text-white">{card.penalty} WOOH</span>
-          <span className="text-xs text-ink-faint">se salti</span>
+          <span className="text-xs text-ink-faint">{d.woohIfSkip}</span>
         </div>
         {isMaster ? (
-          <p className="text-xs text-ink-faint">
-            {lastCard ? "Tocca per terminare 🏁" : "Tocca lo schermo per la prossima carta"}
-          </p>
+          <p className="text-xs text-ink-faint">{lastCard ? d.tapFinish : d.tapNext}</p>
         ) : (
-          <p className="text-sm text-ink-soft">Il master sta scorrendo le carte…</p>
+          <p className="text-sm text-ink-soft">{d.masterFlipping}</p>
         )}
       </div>
     </main>

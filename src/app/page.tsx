@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { AuthScreen } from "@/components/auth/AuthScreen";
+import { getLocale } from "@/lib/locale-server";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -10,5 +11,6 @@ export default async function Home() {
 
   if (user) redirect("/play");
 
-  return <AuthScreen />;
+  const locale = await getLocale();
+  return <AuthScreen locale={locale} />;
 }

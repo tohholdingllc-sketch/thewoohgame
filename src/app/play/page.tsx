@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { PlayActions } from "./PlayActions";
+import { getLocale } from "@/lib/locale-server";
+import { getDict } from "@/lib/i18n";
 
 export default async function Play() {
   const supabase = await createClient();
@@ -17,6 +19,8 @@ export default async function Play() {
     .eq("id", user.id)
     .single();
 
+  const locale = await getLocale();
+  const d = getDict(locale);
   const nickname = profile?.nickname ?? "Giocatore";
 
   return (
@@ -28,10 +32,10 @@ export default async function Play() {
           size={108}
         />
         <div>
-          <p className="text-ink-soft">Benvenuto in The WOOH Game</p>
-          <h1 className="font-display text-4xl">Ciao {nickname}! 👋</h1>
+          <p className="text-ink-soft">{d.welcome}</p>
+          <h1 className="font-display text-4xl">{d.hi(nickname)}</h1>
         </div>
-        <PlayActions />
+        <PlayActions locale={locale} />
       </div>
     </main>
   );

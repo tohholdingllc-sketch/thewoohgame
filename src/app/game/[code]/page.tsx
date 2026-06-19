@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Lobby } from "@/components/lobby/Lobby";
+import { getLocale } from "@/lib/locale-server";
 import type { Deck, Game, GamePlayer } from "@/lib/types";
 
 export default async function GamePage({
@@ -26,9 +27,10 @@ export default async function GamePage({
   // Partita inesistente o non ancora unito → passa da /join (auto-compila il codice)
   if (!game) redirect(`/join?code=${codeUpper}`);
 
-  const [{ data: players }, { data: decks }] = await Promise.all([
+  const [{ data: players }, { data: decks }, locale] = await Promise.all([
     supabase.from("game_players").select("*").eq("game_id", game.id).order("joined_at"),
     supabase.from("decks").select("*").order("sort_order"),
+    getLocale(),
   ]);
 
   return (
@@ -37,6 +39,7 @@ export default async function GamePage({
       initialPlayers={(players ?? []) as GamePlayer[]}
       decks={(decks ?? []) as Deck[]}
       userId={user.id}
+      locale={locale}
     />
   );
 }

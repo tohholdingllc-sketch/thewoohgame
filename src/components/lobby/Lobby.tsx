@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DeckCard } from "@/components/DeckCard";
 import { GameBoard } from "@/components/game/GameBoard";
+import { getDict } from "@/lib/i18n";
 import type { CardRow } from "@/lib/cards";
 import type { Deck, Game, GamePlayer, Locale } from "@/lib/types";
 
@@ -15,9 +16,10 @@ interface LobbyProps {
   initialPlayers: GamePlayer[];
   decks: Deck[];
   userId: string;
+  locale: Locale;
 }
 
-export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps) {
+export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: LobbyProps) {
   const router = useRouter();
   const [supabase] = useState(() => createClient());
   const [game, setGame] = useState<Game>(initialGame);
@@ -27,9 +29,9 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const d = getDict(locale);
   const isMaster = game.master_id === userId;
   const selected = game.selected_decks ?? [];
-  const locale: Locale = game.language === "en" ? "en" : "it";
 
   const refetchPlayers = useCallback(async () => {
     const { data } = await supabase
@@ -40,7 +42,6 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
     if (data) setPlayers(data as GamePlayer[]);
   }, [supabase, game.id]);
 
-  // Realtime: giocatori + stato partita (avanzamento carte, regole, ecc.)
   useEffect(() => {
     const channel = supabase
       .channel(`game-${game.id}`)
@@ -63,7 +64,6 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
     };
   }, [supabase, game.id, refetchPlayers]);
 
-  // Carica i dati delle carte quando la partita parte
   useEffect(() => {
     if (game.status === "lobby") return;
     const ids = game.card_queue ?? [];
@@ -87,7 +87,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
 
   async function toggleDeck(id: string) {
     if (!isMaster) return;
-    const next = selected.includes(id) ? selected.filter((d) => d !== id) : [...selected, id];
+    const next = selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id];
     setGame((g) => ({ ...g, selected_decks: next }));
     await supabase.from("games").update({ selected_decks: next }).eq("id", game.id);
   }
@@ -114,14 +114,8 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
   const start = useCallback(async () => {
     setError(null);
     const { error } = await supabase.rpc("start_game", { p_game_id: game.id });
-    if (error) {
-      setError(
-        error.message.includes("NO_CARDS")
-          ? "Nessuna carta per questi mazzi col numero di giocatori attuale."
-          : error.message,
-      );
-    }
-  }, [supabase, game.id]);
+    if (error) setError(error.message.includes("NO_CARDS") ? d.noCards : error.message);
+  }, [supabase, game.id, d.noCards]);
 
   const advance = useCallback(async () => {
     await supabase.rpc("advance_card", { p_game_id: game.id });
@@ -129,7 +123,6 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
 
   const canStart = isMaster && players.length >= 2 && selected.length >= 1;
 
-  // Partita in gioco o finita → tavolo
   if (game.status !== "lobby") {
     return (
       <GameBoard
@@ -147,23 +140,21 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
   return (
     <main className="flex-1 flex flex-col items-center px-5 py-7 pad-safe-t pad-safe-b">
       <div className="flex w-full max-w-xl flex-col gap-6">
-        {/* Codice + invito */}
         <div className="flex flex-col items-center gap-2 rounded-blob border-2 border-line bg-surface/50 p-5">
-          <span className="text-sm uppercase tracking-widest text-ink-soft">Codice partita</span>
+          <span className="text-sm uppercase tracking-widest text-ink-soft">{d.gameCode}</span>
           <span className="font-display text-6xl tracking-[0.15em] text-white">{game.code}</span>
           <button
             type="button"
             onClick={copyInvite}
             className="mt-1 rounded-full bg-cyan px-5 py-2 font-display font-bold text-ink-dark"
           >
-            {copied ? "Link copiato! ✅" : "📋 Invita amici"}
+            {copied ? d.linkCopied : d.invite}
           </button>
         </div>
 
-        {/* Giocatori */}
         <section>
           <h2 className="mb-3 font-display text-xl text-white">
-            Giocatori <span className="text-ink-soft">({players.length})</span>
+            {d.players} <span className="text-ink-soft">({players.length})</span>
           </h2>
           <div className="flex flex-wrap gap-4">
             {players.map((p) => (
@@ -183,7 +174,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
             <div className="flex gap-2">
               <input
                 className="h-12 flex-1 rounded-2xl border-2 border-line bg-white px-4 font-semibold text-ink-dark placeholder:text-ink-dark/40 focus:border-magenta focus:outline-none"
-                placeholder="Aggiungi giocatore a mano…"
+                placeholder={d.addManual}
                 maxLength={20}
                 value={manualName}
                 onChange={(e) => setManualName(e.target.value)}
@@ -195,14 +186,14 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
             </div>
 
             <section>
-              <h2 className="mb-3 font-display text-xl text-white">Scegli i mazzi</h2>
+              <h2 className="mb-3 font-display text-xl text-white">{d.chooseDecks}</h2>
               <div className="grid gap-3">
-                {decks.map((d) => (
+                {decks.map((deck) => (
                   <DeckCard
-                    key={d.id}
-                    deck={d}
-                    selected={selected.includes(d.id)}
-                    onToggle={() => toggleDeck(d.id)}
+                    key={deck.id}
+                    deck={deck}
+                    selected={selected.includes(deck.id)}
+                    onToggle={() => toggleDeck(deck.id)}
                     locale={locale}
                   />
                 ))}
@@ -210,19 +201,17 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
             </section>
 
             <Button variant="magenta" size="lg" className="w-full" disabled={!canStart} onClick={start}>
-              {canStart ? "🚀 Inizia partita" : "Servono 2+ giocatori e 1 mazzo"}
+              {canStart ? d.startGame : d.startNeeds}
             </Button>
             {error ? <p className="text-center text-sm text-magenta">{error}</p> : null}
           </>
         ) : (
           <div className="flex flex-col items-center gap-4 py-6 text-center">
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-line border-t-yellow" />
-            <p className="max-w-xs text-ink-soft">
-              Aspetta che il master faccia iniziare la partita…
-            </p>
+            <p className="max-w-xs text-ink-soft">{d.waitMaster}</p>
             {selected.length > 0 ? (
               <p className="text-sm text-ink-faint">
-                Mazzi: {decks.filter((d) => selected.includes(d.id)).map((d) => d.name[locale]).join(", ")}
+                {d.decksLabel}: {decks.filter((x) => selected.includes(x.id)).map((x) => x.name[locale]).join(", ")}
               </p>
             ) : null}
           </div>
@@ -233,7 +222,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
           onClick={() => router.push("/play")}
           className="mx-auto mt-2 text-sm text-ink-faint underline underline-offset-4"
         >
-          Esci dalla lobby
+          {d.leaveLobby}
         </button>
       </div>
     </main>

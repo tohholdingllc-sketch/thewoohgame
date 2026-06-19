@@ -6,17 +6,21 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { AgeGate } from "@/components/auth/AgeGate";
-import { AVATARS } from "@/lib/avatars";
 import { WoohEmoji } from "@/components/WoohEmoji";
+import { LocaleToggle } from "@/components/LocaleToggle";
+import { AVATARS } from "@/lib/avatars";
 import { NICKNAME_COLORS } from "@/lib/brand";
+import { getDict } from "@/lib/i18n";
+import type { Locale } from "@/lib/types";
 
 const AGE_KEY = "wooh_age_ok";
 const inputCls =
   "w-full rounded-2xl border-2 border-line bg-white px-4 h-12 text-ink-dark font-semibold placeholder:text-ink-dark/40 focus:border-magenta focus:outline-none";
 
-export function AuthScreen() {
+export function AuthScreen({ locale = "it" }: { locale?: Locale }) {
   const router = useRouter();
   const [supabase] = useState(() => createClient());
+  const d = getDict(locale);
 
   const [ageOk, setAgeOk] = useState<boolean | null>(null);
   const [nickname, setNickname] = useState("");
@@ -46,7 +50,7 @@ export function AuthScreen() {
 
   function needNick() {
     if (nickname.trim().length < 2) {
-      setError("Scegli un nickname (almeno 2 caratteri).");
+      setError(d.nickTooShort);
       return false;
     }
     return true;
@@ -75,11 +79,7 @@ export function AuthScreen() {
     if (mode === "signup") {
       if (!needNick()) return;
       setBusy(true);
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: meta() },
-      });
+      const { error } = await supabase.auth.signUp({ email, password, options: { data: meta() } });
       done(error);
     } else {
       setBusy(true);
@@ -101,13 +101,14 @@ export function AuthScreen() {
     }
   }
 
-  // Evita flash dell'overlay finché non leggiamo localStorage
   if (ageOk === null) return <div className="flex-1" />;
-  if (!ageOk) return <AgeGate onConfirm={confirmAge} />;
+  if (!ageOk) return <AgeGate onConfirm={confirmAge} locale={locale} />;
 
   return (
-    <main className="flex-1 flex flex-col items-center px-6 py-8 pad-safe-t pad-safe-b">
+    <main className="flex-1 flex flex-col items-center px-6 py-6 pad-safe-t pad-safe-b">
       <div className="flex w-full max-w-md flex-1 flex-col items-center gap-7">
+        <LocaleToggle locale={locale} className="self-end" />
+
         {/* Wordmark (logo a pennello: bianco con bordo arancione) */}
         <div className="flex flex-col items-center leading-none">
           <WoohEmoji
@@ -135,28 +136,20 @@ export function AuthScreen() {
 
           <input
             className={`${inputCls} text-center text-lg font-bold`}
-            placeholder="Il tuo nickname"
+            placeholder={d.nicknamePlaceholder}
             maxLength={20}
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
 
-          {/* Picker avatar */}
           <div className="flex w-full gap-3 overflow-x-auto pb-2">
             {AVATARS.map((a) => (
-              <button
-                key={a.id}
-                type="button"
-                onClick={() => setAvatarId(a.id)}
-                aria-label={a.label}
-                className="shrink-0"
-              >
+              <button key={a.id} type="button" onClick={() => setAvatarId(a.id)} aria-label={a.label} className="shrink-0">
                 <PlayerAvatar avatarId={a.id} color={color} size={48} selected={a.id === avatarId} />
               </button>
             ))}
           </div>
 
-          {/* Picker colore */}
           <div className="flex gap-3">
             {NICKNAME_COLORS.map((c) => (
               <button
@@ -164,34 +157,23 @@ export function AuthScreen() {
                 type="button"
                 onClick={() => setColor(c)}
                 aria-label={`Colore ${c}`}
-                className={`h-8 w-8 rounded-full transition-transform ${
-                  c === color ? "scale-110 ring-4 ring-white" : ""
-                }`}
+                className={`h-8 w-8 rounded-full transition-transform ${c === color ? "scale-110 ring-4 ring-white" : ""}`}
                 style={{ backgroundColor: c }}
               />
             ))}
           </div>
         </div>
 
-        {/* Gioca come ospite (path primario) */}
-        <Button
-          variant="magenta"
-          size="lg"
-          className="w-full"
-          disabled={busy}
-          onClick={playAsGuest}
-        >
-          🎉 Gioca come ospite
+        <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={playAsGuest}>
+          {d.playGuest}
         </Button>
 
-        {/* Divider */}
         <div className="flex w-full items-center gap-3 text-ink-faint">
           <span className="h-px flex-1 bg-line" />
-          <span className="text-xs">oppure salva il tuo account</span>
+          <span className="text-xs">{d.orSaveAccount}</span>
           <span className="h-px flex-1 bg-line" />
         </div>
 
-        {/* Account email/password */}
         <div className="flex w-full flex-col gap-3">
           <input
             className={inputCls}
@@ -211,7 +193,7 @@ export function AuthScreen() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button variant="cyan" size="md" className="w-full" disabled={busy} onClick={submitAccount}>
-            {mode === "signup" ? "Registrati e gioca" : "Accedi"}
+            {mode === "signup" ? d.signupAndPlay : d.loginCta}
           </Button>
           <button
             type="button"
@@ -221,7 +203,7 @@ export function AuthScreen() {
             }}
             className="text-sm text-ink-soft underline underline-offset-4"
           >
-            {mode === "signup" ? "Hai già un account? Accedi" : "Non hai un account? Registrati"}
+            {mode === "signup" ? d.toLogin : d.toSignup}
           </button>
 
           <button
@@ -230,19 +212,16 @@ export function AuthScreen() {
             disabled={busy}
             className="mt-1 flex h-12 w-full items-center justify-center gap-2 rounded-2xl border-2 border-line bg-surface px-4 font-bold text-ink disabled:opacity-50"
           >
-            <span>Continua con Google</span>
+            <span>{d.continueGoogle}</span>
           </button>
         </div>
 
         {error ? (
-          <p className="w-full rounded-xl bg-magenta/15 px-4 py-2 text-center text-sm text-magenta">
-            {error}
-          </p>
+          <p className="w-full rounded-xl bg-magenta/15 px-4 py-2 text-center text-sm text-magenta">{error}</p>
         ) : null}
 
         <p className="mt-auto max-w-xs text-center text-xs leading-relaxed text-ink-faint">
-          Gioca responsabilmente. Le carte funzionano anche con bevande analcoliche.
-          Se bevi, non guidare. 18+
+          {d.disclaimerShort}
         </p>
       </div>
     </main>
