@@ -21,14 +21,11 @@ const base =
   "disabled:opacity-50 disabled:pointer-events-none disabled:active:translate-y-0";
 
 const variants: Record<Variant, string> = {
-  yellow:
-    "bg-yellow text-ink-dark shadow-[0_6px_0_0_#c99e10] active:shadow-[0_2px_0_0_#c99e10]",
-  cyan: "bg-cyan text-ink-dark shadow-[0_6px_0_0_#239b96] active:shadow-[0_2px_0_0_#239b96]",
-  magenta:
-    "bg-magenta text-ink-dark shadow-[0_6px_0_0_#c73b79] active:shadow-[0_2px_0_0_#c73b79]",
-  lime: "bg-lime text-ink-dark shadow-[0_6px_0_0_#6fb23b] active:shadow-[0_2px_0_0_#6fb23b]",
-  ghost:
-    "bg-surface-2 text-ink border-2 border-line shadow-[0_6px_0_0_#1c0838] active:shadow-[0_2px_0_0_#1c0838]",
+  yellow: "bg-yellow text-ink-dark btn3d-yellow",
+  cyan: "bg-cyan text-ink-dark btn3d-cyan",
+  magenta: "bg-magenta text-ink-dark btn3d-magenta",
+  lime: "bg-lime text-ink-dark btn3d-lime",
+  ghost: "bg-surface-2 text-ink border-2 border-line btn3d-ghost",
 };
 
 const sizes: Record<Size, string> = {

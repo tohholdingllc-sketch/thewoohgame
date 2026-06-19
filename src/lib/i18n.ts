@@ -71,6 +71,7 @@ const it = {
   masterFlipping: "Il master sta scorrendo le carte…",
   turnOf: (n: string) => `👉 Tocca a ${n}`,
   exitGame: "Esci dalla partita",
+  restart: "Rigioca",
   menuLabel: "Menu master",
   // card types
   ct_io_non_ho_mai: "Io non ho mai",
@@ -145,6 +146,7 @@ const en: typeof it = {
   masterFlipping: "The host is flipping the cards…",
   turnOf: (n: string) => `👉 ${n}'s turn`,
   exitGame: "Leave the game",
+  restart: "Play again",
   menuLabel: "Host menu",
   ct_io_non_ho_mai: "Never have I ever",
   ct_tre_cose: "3 things",

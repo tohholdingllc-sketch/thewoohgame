@@ -153,7 +153,7 @@ export function GameBoard({
   return (
     <main
       onClick={isMaster ? () => void doAdvance() : undefined}
-      className={`relative flex-1 flex flex-col px-5 py-6 pad-safe-t pad-safe-b ${
+      className={`relative flex-1 flex flex-col px-5 pt-12 pb-10 pad-safe-t pad-safe-b ${
         isMaster ? "cursor-pointer select-none" : ""
       }`}
     >
@@ -163,8 +163,8 @@ export function GameBoard({
         <MasterMenu
           label={d.menuLabel}
           actions={[
-            { icon: "🔄", label: d.playAgain, onClick: () => void onRestart() },
-            { icon: "🚪", label: d.exitGame, onClick: onExit, danger: true },
+            { label: d.restart, onClick: () => void onRestart() },
+            { label: d.exitGame, onClick: onExit, danger: true },
           ]}
         />
       ) : null}

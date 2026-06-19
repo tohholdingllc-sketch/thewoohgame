@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { AgeGate } from "@/components/auth/AgeGate";
 import { LocaleToggle } from "@/components/LocaleToggle";
+import { EmojiBackground } from "@/components/EmojiBackground";
 import { AVATARS, avatarById } from "@/lib/avatars";
 import { NICKNAME_COLORS } from "@/lib/brand";
 import { friendlyAuthError, getDict } from "@/lib/i18n";
@@ -110,27 +111,19 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
 
   return (
     <main className="relative flex-1 flex flex-col items-center overflow-hidden px-6 py-6 pad-safe-t pad-safe-b">
-      {/* Sfondo: il lupo che fa WOOH */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/brand/wolf-love.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-6 w-[135%] max-w-none -translate-x-1/2 select-none opacity-[0.16]"
-      />
+      <EmojiBackground />
       <div className="relative z-10 flex w-full max-w-md flex-1 flex-col items-center gap-7">
         <LocaleToggle locale={locale} className="self-end" />
 
-        {/* Logo: THE + WOOH (a pennello) + GAME */}
-        <h1 className="flex flex-col items-center leading-none" aria-label="The WOOH Game">
-          <span className="font-display text-lg font-bold tracking-[0.45em] text-white pl-[0.45em]">THE</span>
+        {/* Logo app: tile giallo "THE WOOH GAME" */}
+        <h1 className="leading-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/brand/logo.png"
-            alt=""
-            className="my-1 w-60 max-w-[72%] drop-shadow-[0_5px_0_rgba(0,0,0,0.2)]"
+            src="/brand/logo-app.png"
+            alt="The WOOH Game"
+            className="w-40 max-w-[55%] rounded-[22px]"
+            style={{ boxShadow: "0 0 44px rgba(255,210,63,0.32)" }}
           />
-          <span className="font-display text-2xl font-bold tracking-[0.4em] text-white pl-[0.4em]">GAME</span>
         </h1>
 
         {/* Identità */}

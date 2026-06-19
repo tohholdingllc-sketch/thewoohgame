@@ -159,7 +159,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
       {isMaster ? (
         <MasterMenu
           label={d.menuLabel}
-          actions={[{ icon: "🚪", label: d.exitGame, onClick: () => void leaveLobby(), danger: true }]}
+          actions={[{ label: d.exitGame, onClick: () => void leaveLobby(), danger: true }]}
         />
       ) : null}
       <div className="flex w-full max-w-xl flex-col gap-6">
