@@ -115,15 +115,27 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
       <div className="relative z-10 flex w-full max-w-md flex-1 flex-col items-center gap-7">
         <LocaleToggle locale={locale} className="self-end" />
 
-        {/* Logo app: tile giallo "THE WOOH GAME" */}
-        <h1 className="leading-none">
+        {/* Logo: THE + WOOH (a pennello) + GAME — scritta gialla con glow soft */}
+        <h1 className="flex flex-col items-center leading-none" aria-label="The WOOH Game">
+          <span
+            className="font-display text-lg font-bold tracking-[0.45em] text-yellow pl-[0.45em]"
+            style={{ textShadow: "0 0 16px rgba(255,210,63,0.45)" }}
+          >
+            THE
+          </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/brand/logo-app.png"
-            alt="The WOOH Game"
-            className="w-40 max-w-[55%] rounded-[22px]"
-            style={{ boxShadow: "0 0 44px rgba(255,210,63,0.32)" }}
+            src="/brand/logo.png"
+            alt=""
+            className="my-1 w-60 max-w-[72%]"
+            style={{ filter: "drop-shadow(0 0 18px rgba(255,255,255,0.22))" }}
           />
+          <span
+            className="font-display text-2xl font-bold tracking-[0.4em] text-yellow pl-[0.4em]"
+            style={{ textShadow: "0 0 16px rgba(255,210,63,0.45)" }}
+          >
+            GAME
+          </span>
         </h1>
 
         {/* Identità */}

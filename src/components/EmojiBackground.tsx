@@ -29,9 +29,9 @@ export function EmojiBackground() {
             position: "absolute",
             top: x.top,
             left: x.left,
-            fontSize: x.size,
+            fontSize: Math.round(x.size * 1.4),
             transform: `rotate(${x.rot}deg)`,
-            opacity: 0.12,
+            opacity: 0.13,
           }}
         >
           {x.e}

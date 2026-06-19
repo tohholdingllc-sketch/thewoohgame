@@ -68,14 +68,14 @@
 
 /* Bottoni neon: ombra 3D solida + glow colorato (si schiaccia al tap). */
 @layer components {
-  .btn3d-yellow { box-shadow: 0 5px 0 0 #c99e10, 0 0 24px rgb(255 210 63 / 0.55); }
-  .btn3d-yellow:active { box-shadow: 0 2px 0 0 #c99e10, 0 0 20px rgb(255 210 63 / 0.6); }
-  .btn3d-cyan { box-shadow: 0 5px 0 0 #239b96, 0 0 28px rgb(61 214 208 / 0.8); }
-  .btn3d-cyan:active { box-shadow: 0 2px 0 0 #239b96, 0 0 22px rgb(61 214 208 / 0.85); }
-  .btn3d-magenta { box-shadow: 0 5px 0 0 #c73b79, 0 0 28px rgb(255 93 162 / 0.8); }
-  .btn3d-magenta:active { box-shadow: 0 2px 0 0 #c73b79, 0 0 22px rgb(255 93 162 / 0.85); }
-  .btn3d-lime { box-shadow: 0 5px 0 0 #6fb23b, 0 0 24px rgb(155 229 100 / 0.55); }
-  .btn3d-lime:active { box-shadow: 0 2px 0 0 #6fb23b, 0 0 20px rgb(155 229 100 / 0.6); }
+  .btn3d-yellow { box-shadow: 0 5px 0 0 #c99e10, 0 0 16px rgb(255 210 63 / 0.38); }
+  .btn3d-yellow:active { box-shadow: 0 2px 0 0 #c99e10, 0 0 14px rgb(255 210 63 / 0.42); }
+  .btn3d-cyan { box-shadow: 0 5px 0 0 #239b96, 0 0 18px rgb(61 214 208 / 0.48); }
+  .btn3d-cyan:active { box-shadow: 0 2px 0 0 #239b96, 0 0 15px rgb(61 214 208 / 0.52); }
+  .btn3d-magenta { box-shadow: 0 5px 0 0 #c73b79, 0 0 18px rgb(255 93 162 / 0.48); }
+  .btn3d-magenta:active { box-shadow: 0 2px 0 0 #c73b79, 0 0 15px rgb(255 93 162 / 0.52); }
+  .btn3d-lime { box-shadow: 0 5px 0 0 #6fb23b, 0 0 16px rgb(155 229 100 / 0.38); }
+  .btn3d-lime:active { box-shadow: 0 2px 0 0 #6fb23b, 0 0 14px rgb(155 229 100 / 0.42); }
   .btn3d-ghost { box-shadow: 0 5px 0 0 #070512; }
   .btn3d-ghost:active { box-shadow: 0 2px 0 0 #070512; }
 }
