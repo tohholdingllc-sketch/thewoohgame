@@ -30,7 +30,9 @@ workflows:
           npm run build
           npx cap sync android
       - name: Gradle assembleDebug
-        script: cd android && chmod +x ./gradlew && ./gradlew assembleDebug
+        script: |
+          export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+          cd android && chmod +x ./gradlew && ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/**/*.apk
 
@@ -55,7 +57,9 @@ workflows:
           npm run build
           npx cap sync android
       - name: Gradle bundleRelease (firmato)
-        script: cd android && chmod +x ./gradlew && ./gradlew bundleRelease
+        script: |
+          export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+          cd android && chmod +x ./gradlew && ./gradlew bundleRelease
     artifacts:
       - android/app/build/outputs/**/*.aab
 
