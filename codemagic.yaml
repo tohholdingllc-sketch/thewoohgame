@@ -31,8 +31,10 @@ workflows:
           npx cap sync android
       - name: Gradle assembleDebug
         script: |
-          export JAVA_HOME=$(/usr/libexec/java_home -v 21)
-          cd android && chmod +x ./gradlew && ./gradlew assembleDebug
+          echo "=== JDK installati ==="; /usr/libexec/java_home -V 2>&1 || true
+          export JAVA_HOME=$(/usr/libexec/java_home -v 21 2>/dev/null || /usr/libexec/java_home -v 23 2>/dev/null || /usr/libexec/java_home -v 22 2>/dev/null || /usr/libexec/java_home -v 24 2>/dev/null || echo "$JAVA_HOME")
+          echo "JAVA_HOME scelto = $JAVA_HOME"; "$JAVA_HOME/bin/java" -version 2>&1 || true
+          cd android && chmod +x ./gradlew && ./gradlew assembleDebug -Dorg.gradle.java.home="$JAVA_HOME"
     artifacts:
       - android/app/build/outputs/**/*.apk
 
@@ -58,8 +60,8 @@ workflows:
           npx cap sync android
       - name: Gradle bundleRelease (firmato)
         script: |
-          export JAVA_HOME=$(/usr/libexec/java_home -v 21)
-          cd android && chmod +x ./gradlew && ./gradlew bundleRelease
+          export JAVA_HOME=$(/usr/libexec/java_home -v 21 2>/dev/null || /usr/libexec/java_home -v 23 2>/dev/null || /usr/libexec/java_home -v 22 2>/dev/null || /usr/libexec/java_home -v 24 2>/dev/null || echo "$JAVA_HOME")
+          cd android && chmod +x ./gradlew && ./gradlew bundleRelease -Dorg.gradle.java.home="$JAVA_HOME"
     artifacts:
       - android/app/build/outputs/**/*.aab
 
