@@ -1,26 +1,75 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  THE WOOH GAME — Design tokens (Tailwind v4, CSS-first via @theme).
+  Stile "Gartic Phone": dark, acceso, tondeggiante, dito-friendly.
+  I font arrivano da next/font (variabili --font-display / --font-body, vedi layout.tsx).
+*/
+@theme {
+  /* --- Superfici (notte viola) --- */
+  --color-night: #1b1230;
+  --color-night-top: #241734;
+  --color-surface: #2a1d49;
+  --color-surface-2: #34255a;
+  --color-line: #45356b;
+
+  /* --- Testo --- */
+  --color-ink: #ffffff;
+  --color-ink-soft: #c9bfe0;
+  --color-ink-faint: #8d80ad;
+  --color-ink-dark: #1b1230; /* testo su accenti chiari */
+
+  /* --- Accenti vivaci --- */
+  --color-yellow: #ffd23f;
+  --color-cyan: #3dd6d0;
+  --color-magenta: #ff5da2;
+  --color-lime: #9be564;
+  --color-violet: #8b5cf6;
+  --color-orange: #ff8a3d;
+
+  /* --- Raggi generosi --- */
+  --radius-blob: 2rem;
+
+  /* --- Ombre morbide --- */
+  --shadow-card: 0 18px 40px -16px rgba(0, 0, 0, 0.55);
+
+  /* --- Famiglie font (sovrascritte dalle variabili next/font) --- */
+  --font-display: var(--font-fredoka), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    background:
+      radial-gradient(130% 100% at 50% 0%, var(--color-night-top) 0%, var(--color-night) 58%);
+    background-attachment: fixed;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    /* niente tap highlight blu su mobile */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Utility comode per le safe-area dei notch (iOS/Android) */
+@utility pad-safe-t {
+  padding-top: env(safe-area-inset-top);
+}
+@utility pad-safe-b {
+  padding-bottom: env(safe-area-inset-bottom);
 }
