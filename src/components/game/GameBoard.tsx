@@ -53,6 +53,17 @@ export function GameBoard({
     return () => window.removeEventListener("keydown", onKey);
   }, [isMaster, ended, doAdvance]);
 
+  // Suono WOOH quando esce una carta di tipo wooh (best-effort: l'autoplay
+  // parte dopo che l'utente ha già interagito con la pagina).
+  useEffect(() => {
+    if (ended) return;
+    const current = cardsById[game.card_queue[idx]];
+    if (current?.type !== "wooh") return;
+    const audio = new Audio("/sounds/wooh.mp3");
+    audio.volume = 0.7;
+    audio.play().catch(() => {});
+  }, [idx, ended, cardsById, game.card_queue]);
+
   const infoButton = (
     <button
       type="button"
