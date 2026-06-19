@@ -10,8 +10,11 @@ const config: CapacitorConfig = {
   appName: "The WOOH Game",
   webDir: "public",
   backgroundColor: "#8a27d6",
+  // URL produzione reale: il progetto Vercel sta sotto il team
+  // "kiv-mobile-s-projects", quindi l'alias di produzione (branch main) è questo.
+  // Se in futuro colleghi un dominio custom, basta sostituirlo qui.
   server: {
-    url: "https://thewoohgame.vercel.app",
+    url: "https://thewoohgame-git-main-kiv-mobile-s-projects.vercel.app",
     cleartext: false,
   },
   android: {
