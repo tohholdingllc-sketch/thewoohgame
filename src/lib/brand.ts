@@ -3,7 +3,7 @@ export const BRAND = {
   name: "The WOOH Game",
   shortName: "WOOH",
   tagline: "Una partita. Tutti col proprio telefono.",
-  themeColor: "#1b1230",
+  themeColor: "#8a27d6",
 } as const;
 
 /** Palette accenti come valori JS (per avatar, colori nickname, grafici, ecc.). */
