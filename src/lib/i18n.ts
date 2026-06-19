@@ -72,6 +72,7 @@ const it = {
   ct_regola: "Regola",
   ct_wooh: "WOOH!",
   ct_manichino: "Manichino",
+  ct_domanda: "Domanda",
   ct_default: "Carta",
 };
 
@@ -136,6 +137,7 @@ const en: typeof it = {
   ct_regola: "Rule",
   ct_wooh: "WOOH!",
   ct_manichino: "Mannequin",
+  ct_domanda: "Question",
   ct_default: "Card",
 };
 
@@ -162,6 +164,8 @@ export function cardTypeLabel(dict: Dict, type: string): string {
       return dict.ct_wooh;
     case "manichino":
       return dict.ct_manichino;
+    case "domanda":
+      return dict.ct_domanda;
     default:
       return dict.ct_default;
   }

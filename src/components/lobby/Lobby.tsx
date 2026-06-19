@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DeckCard } from "@/components/DeckCard";
 import { GameBoard } from "@/components/game/GameBoard";
+import { QRCodeSVG } from "qrcode.react";
 import { getDict } from "@/lib/i18n";
 import type { CardRow } from "@/lib/cards";
 import type { Deck, Game, GamePlayer, Locale } from "@/lib/types";
@@ -27,6 +28,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   const [cardsById, setCardsById] = useState<Record<string, CardRow>>({});
   const [manualName, setManualName] = useState("");
   const [copied, setCopied] = useState(false);
+  const [inviteUrl, setInviteUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const d = getDict(locale);
@@ -85,6 +87,10 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
     };
   }, [supabase, game.status, (game.card_queue ?? []).length]);
 
+  useEffect(() => {
+    setInviteUrl(`${location.origin}/join?code=${game.code}`);
+  }, [game.code]);
+
   async function toggleDeck(id: string) {
     if (!isMaster) return;
     const next = selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id];
@@ -99,7 +105,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
     await supabase.rpc("add_manual_player", {
       p_game_id: game.id,
       p_nickname: n,
-      p_avatar_id: "wooh",
+      p_avatar_id: "fox",
       p_color: "#ffd23f",
     });
   }
@@ -143,6 +149,11 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
         <div className="flex flex-col items-center gap-2 rounded-blob border-2 border-line bg-surface/50 p-5">
           <span className="text-sm uppercase tracking-widest text-ink-soft">{d.gameCode}</span>
           <span className="font-display text-6xl tracking-[0.15em] text-white">{game.code}</span>
+          {inviteUrl ? (
+            <div className="mt-2 rounded-2xl bg-white p-2.5">
+              <QRCodeSVG value={inviteUrl} size={148} bgColor="#ffffff" fgColor="#2a0f4d" level="M" />
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={copyInvite}

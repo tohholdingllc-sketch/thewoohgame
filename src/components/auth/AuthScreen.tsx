@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { AgeGate } from "@/components/auth/AgeGate";
-import { WoohEmoji } from "@/components/WoohEmoji";
 import { LocaleToggle } from "@/components/LocaleToggle";
 import { AVATARS } from "@/lib/avatars";
 import { NICKNAME_COLORS } from "@/lib/brand";
@@ -17,8 +15,7 @@ const AGE_KEY = "wooh_age_ok";
 const inputCls =
   "w-full rounded-2xl border-2 border-line bg-white px-4 h-12 text-ink-dark font-semibold placeholder:text-ink-dark/40 focus:border-magenta focus:outline-none";
 
-export function AuthScreen({ locale = "it" }: { locale?: Locale }) {
-  const router = useRouter();
+export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJoin?: string }) {
   const [supabase] = useState(() => createClient());
   const d = getDict(locale);
 
@@ -62,8 +59,7 @@ export function AuthScreen({ locale = "it" }: { locale?: Locale }) {
       setBusy(false);
       return;
     }
-    router.replace("/play");
-    router.refresh();
+    window.location.assign(nextJoin ? `/join?code=${encodeURIComponent(nextJoin)}` : "/play");
   }
 
   async function playAsGuest() {
@@ -109,30 +105,30 @@ export function AuthScreen({ locale = "it" }: { locale?: Locale }) {
       <div className="flex w-full max-w-md flex-1 flex-col items-center gap-7">
         <LocaleToggle locale={locale} className="self-end" />
 
-        {/* Wordmark (logo a pennello: bianco con bordo arancione) */}
-        <div className="flex flex-col items-center leading-none">
-          <WoohEmoji
-            variant="wooh"
-            size={72}
-            className="mb-3 drop-shadow-[0_6px_0_rgba(0,0,0,0.18)]"
+        {/* Logo: THE + WOOH (a pennello) + GAME */}
+        <h1 className="flex flex-col items-center leading-none" aria-label="The WOOH Game">
+          <span className="font-display text-lg font-bold tracking-[0.45em] text-white pl-[0.45em]">THE</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo.png"
+            alt=""
+            className="my-1 w-60 max-w-[72%] drop-shadow-[0_5px_0_rgba(0,0,0,0.2)]"
           />
-          <span className="font-display text-base tracking-[0.3em] text-white/90">THE</span>
-          <h1
-            className="font-display text-7xl text-white"
-            style={{
-              WebkitTextStroke: "6px #ff8a3d",
-              paintOrder: "stroke",
-              filter: "drop-shadow(0 5px 0 rgba(0,0,0,0.18))",
-            }}
-          >
-            WOOH
-          </h1>
-          <span className="font-display text-2xl tracking-[0.35em] text-white">GAME</span>
-        </div>
+          <span className="font-display text-2xl font-bold tracking-[0.4em] text-white pl-[0.4em]">GAME</span>
+        </h1>
 
         {/* Identità */}
         <div className="flex w-full flex-col items-center gap-4">
-          <PlayerAvatar avatarId={avatarId} color={color} size={88} />
+          <button
+            type="button"
+            aria-label="Cambia avatar"
+            onClick={() =>
+              setAvatarId(AVATARS[(AVATARS.findIndex((a) => a.id === avatarId) + 1) % AVATARS.length].id)
+            }
+            className="transition-transform active:scale-95"
+          >
+            <PlayerAvatar avatarId={avatarId} color={color} size={96} />
+          </button>
 
           <input
             className={`${inputCls} text-center text-lg font-bold`}

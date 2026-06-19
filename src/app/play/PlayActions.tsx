@@ -30,8 +30,7 @@ export function PlayActions({ locale = "it" }: { locale?: Locale }) {
 
   async function signOut() {
     await supabase.auth.signOut();
-    router.replace("/");
-    router.refresh();
+    window.location.assign("/");
   }
 
   return (

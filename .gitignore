@@ -40,6 +40,9 @@ yarn-error.log*
 # Stray del sistema skill (non parte dell'app)
 skills-lock.json
 
+# Avatar grezzi (intermedi, prima di rembg)
+/public/avatars/raw/
+
 # vercel
 .vercel
 

@@ -11,6 +11,8 @@ const intensityBySlug = Object.fromEntries(data.decks.map((d) => [d.slug, d.inte
 let sql = `-- AUTO-GENERATO da data/cards.seed.json — rigenera con: node scripts/gen-seed.mjs\n`;
 sql += `-- Re-seed: testi WOOH + colonna penalty (WOOH da bere se salti la carta)\n\n`;
 sql += `alter table public.cards add column if not exists penalty int not null default 2;\n\n`;
+sql += `alter table public.cards drop constraint if exists cards_type_chk;\n`;
+sql += `alter table public.cards add constraint cards_type_chk check (type in ('io_non_ho_mai','tre_cose','sinonimi','azione','regola','wooh','manichino','domanda'));\n\n`;
 
 // --- DECKS (upsert su slug) ---
 sql += `insert into public.decks (slug, name, description, intensity, is_premium, min_players, sort_order) values\n`;
@@ -42,5 +44,5 @@ sql += data.cards
   .join(",\n");
 sql += ";\n";
 
-fs.writeFileSync("supabase/migrations/20260619100600_woohify_penalty.sql", sql, "utf8");
-console.log(`OK: re-seed ${data.decks.length} mazzi, ${data.cards.length} carte (con penalty) → 20260619100600_woohify_penalty.sql`);
+fs.writeFileSync("supabase/migrations/20260619100700_expand_content.sql", sql, "utf8");
+console.log(`OK: re-seed ${data.decks.length} mazzi, ${data.cards.length} carte (con penalty) → 20260619100700_expand_content.sql`);

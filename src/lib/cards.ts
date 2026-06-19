@@ -25,6 +25,7 @@ export const CARD_TYPE_META: Record<string, { label: string; emoji: string }> = 
   regola: { label: "Regola", emoji: "📜" },
   wooh: { label: "WOOH!", emoji: "🗣️" },
   manichino: { label: "Manichino", emoji: "🪆" },
+  domanda: { label: "Domanda", emoji: "💭" },
 };
 
 export function cardTypeMeta(type: string) {

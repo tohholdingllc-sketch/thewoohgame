@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/client";
@@ -11,34 +11,70 @@ function JoinInner() {
   const router = useRouter();
   const params = useSearchParams();
   const [supabase] = useState(() => createClient());
+  const codeParam = (params.get("code") ?? "").toUpperCase();
+
   const [locale, setLocale] = useState<Locale>("it");
-  const [code, setCode] = useState((params.get("code") ?? "").toUpperCase());
+  const [code, setCode] = useState(codeParam);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setLocale(normalizeLocale(document.cookie.match(/wooh_locale=([^;]+)/)?.[1]));
-  }, []);
+  const [checking, setChecking] = useState(true);
   const d = getDict(locale);
 
-  async function join() {
+  const doJoin = useCallback(
+    async (c: string) => {
+      setBusy(true);
+      setError(null);
+      const { data, error } = await supabase.rpc("join_game", { p_code: c });
+      if (error) {
+        const m = error.message;
+        setError(
+          m.includes("GAME_NOT_FOUND") ? d.gameNotFound : m.includes("GAME_NOT_JOINABLE") ? d.gameStarted : m,
+        );
+        setBusy(false);
+        setChecking(false);
+        return;
+      }
+      router.push(`/game/${data}`);
+    },
+    [supabase, router, d.gameNotFound, d.gameStarted],
+  );
+
+  // All'apertura: se non loggato -> vai al login conservando il codice; se
+  // loggato e c'è un codice nel link -> entra automaticamente.
+  useEffect(() => {
+    setLocale(normalizeLocale(document.cookie.match(/wooh_locale=([^;]+)/)?.[1]));
+    (async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.replace(codeParam ? `/?join=${encodeURIComponent(codeParam)}` : "/");
+        return;
+      }
+      if (codeParam) {
+        void doJoin(codeParam);
+        return;
+      }
+      setChecking(false);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function manualJoin() {
     const c = code.trim().toUpperCase();
     if (c.length < 4) {
       setError(d.enterCode);
       return;
     }
-    setBusy(true);
-    setError(null);
-    const { data, error } = await supabase.rpc("join_game", { p_code: c });
-    if (error) {
-      const m = error.message;
-      setError(
-        m.includes("GAME_NOT_FOUND") ? d.gameNotFound : m.includes("GAME_NOT_JOINABLE") ? d.gameStarted : m,
-      );
-      setBusy(false);
-      return;
-    }
-    router.push(`/game/${data}`);
+    void doJoin(c);
+  }
+
+  if (checking) {
+    return (
+      <main className="flex-1 flex items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-line border-t-yellow" />
+      </main>
+    );
   }
 
   return (
@@ -54,9 +90,9 @@ function JoinInner() {
           autoComplete="off"
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
-          onKeyDown={(e) => e.key === "Enter" && join()}
+          onKeyDown={(e) => e.key === "Enter" && manualJoin()}
         />
-        <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={join}>
+        <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={manualJoin}>
           {d.joinCta}
         </Button>
         {error ? (
