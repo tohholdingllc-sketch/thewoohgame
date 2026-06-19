@@ -1,0 +1,97 @@
+# Codemagic CI — build cloud di The WOOH Game (Capacitor).
+# L'app web (export statico Next in out/) viene impacchettata dentro Android/iOS.
+#
+# SETUP lato Codemagic (UI, una volta sola):
+#  1) Collega il repo GitHub tohholdingllc-sketch/thewoohgame.
+#  2) Crea un Environment group "supabase" con le variabili:
+#       NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
+#  3) Android firmato (Play): carica un keystore -> group "google_play" (CM_KEYSTORE...).
+#  4) iOS: collega l'integrazione "App Store Connect API key" + abilita automatic code signing.
+# Il workflow Android "debug" produce subito un APK installabile per i test (nessuna firma).
+
+workflows:
+  android-debug:
+    name: WOOH — Android APK (test)
+    instance_type: linux_x2
+    max_build_duration: 60
+    environment:
+      node: 20
+      groups:
+        - supabase
+    scripts:
+      - name: Install deps
+        script: npm ci
+      - name: Env Supabase
+        script: |
+          printf 'NEXT_PUBLIC_SUPABASE_URL=%s\nNEXT_PUBLIC_SUPABASE_ANON_KEY=%s\n' \
+            "$NEXT_PUBLIC_SUPABASE_URL" "$NEXT_PUBLIC_SUPABASE_ANON_KEY" > .env.local
+      - name: Build web (export statico) + sync
+        script: |
+          npm run build
+          npx cap sync android
+      - name: Gradle assembleDebug
+        script: cd android && ./gradlew assembleDebug
+    artifacts:
+      - android/app/build/outputs/**/*.apk
+
+  android-release:
+    name: WOOH — Android AAB (Play Store)
+    instance_type: linux_x2
+    max_build_duration: 60
+    environment:
+      node: 20
+      groups:
+        - supabase
+        - google_play   # CM_KEYSTORE_PATH, CM_KEYSTORE_PASSWORD, CM_KEY_ALIAS, CM_KEY_PASSWORD
+    scripts:
+      - name: Install deps
+        script: npm ci
+      - name: Env Supabase
+        script: |
+          printf 'NEXT_PUBLIC_SUPABASE_URL=%s\nNEXT_PUBLIC_SUPABASE_ANON_KEY=%s\n' \
+            "$NEXT_PUBLIC_SUPABASE_URL" "$NEXT_PUBLIC_SUPABASE_ANON_KEY" > .env.local
+      - name: Build web (export statico) + sync
+        script: |
+          npm run build
+          npx cap sync android
+      - name: Gradle bundleRelease (firmato)
+        script: cd android && ./gradlew bundleRelease
+    artifacts:
+      - android/app/build/outputs/**/*.aab
+
+  ios:
+    name: WOOH — iOS (App Store / TestFlight)
+    instance_type: mac_mini_m2
+    max_build_duration: 90
+    integrations:
+      app_store_connect: codemagic   # nome dell'API key configurata in Codemagic
+    environment:
+      node: 20
+      xcode: latest
+      cocoapods: default
+      groups:
+        - supabase
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.woohgame.app
+    scripts:
+      - name: Install deps
+        script: npm ci
+      - name: Env Supabase
+        script: |
+          printf 'NEXT_PUBLIC_SUPABASE_URL=%s\nNEXT_PUBLIC_SUPABASE_ANON_KEY=%s\n' \
+            "$NEXT_PUBLIC_SUPABASE_URL" "$NEXT_PUBLIC_SUPABASE_ANON_KEY" > .env.local
+      - name: Build web (export statico)
+        script: npm run build
+      - name: Aggiungi iOS + sync + pods
+        script: |
+          npx cap add ios || true
+          npx cap sync ios
+          cd ios/App && pod install
+      - name: Set signing + build IPA
+        script: |
+          xcode-project use-profiles
+          cd ios/App
+          xcode-project build-ipa --workspace App.xcworkspace --scheme App
+    artifacts:
+      - build/ios/ipa/*.ipa

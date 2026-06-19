@@ -49,3 +49,7 @@ skills-lock.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Capacitor: web bundle generato da `cap sync` (rigenerato in CI)
+/android/app/src/main/assets/public/
+/android/app/src/main/assets/capacitor.config.json

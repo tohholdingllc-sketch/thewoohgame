@@ -2,34 +2,28 @@ import type { CapacitorConfig } from "@capacitor/cli";
 
 /*
   The WOOH Game — Capacitor.
-  App SSR + realtime → la shell nativa carica il sito live (server.url).
-  Cambia `appId`/`server.url` se necessario prima della pubblicazione.
+  App "impacchettata": gli asset web (export statico Next in `out/`) stanno DENTRO
+  l'app, NON caricati da un URL remoto → niente rischio rifiuto Apple. Nessun App Link
+  configurato, quindi i link di invito condivisi restano sempre browser-first.
 */
 const config: CapacitorConfig = {
   appId: "com.woohgame.app",
   appName: "The WOOH Game",
-  webDir: "public",
-  backgroundColor: "#8a27d6",
-  // URL produzione reale: il progetto Vercel sta sotto il team
-  // "kiv-mobile-s-projects", quindi l'alias di produzione (branch main) è questo.
-  // Se in futuro colleghi un dominio custom, basta sostituirlo qui.
-  server: {
-    url: "https://thewoohgame-git-main-kiv-mobile-s-projects.vercel.app",
-    cleartext: false,
-  },
+  webDir: "out",
+  backgroundColor: "#0a0716",
   android: {
-    backgroundColor: "#8a27d6",
+    backgroundColor: "#0a0716",
   },
   plugins: {
     SplashScreen: {
       launchShowDuration: 1200,
-      backgroundColor: "#8a27d6",
+      backgroundColor: "#0a0716",
       showSpinner: false,
       androidScaleType: "CENTER_CROP",
     },
     StatusBar: {
       style: "LIGHT",
-      backgroundColor: "#8a27d6",
+      backgroundColor: "#0a0716",
     },
   },
 };
