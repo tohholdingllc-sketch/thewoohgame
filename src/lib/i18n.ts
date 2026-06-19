@@ -12,7 +12,7 @@ const it = {
   ageYes: "Sì, ho 18+ anni",
   ageNo: "No, esco",
   // auth
-  nicknamePlaceholder: "Il tuo nickname",
+  nicknamePlaceholder: "Il tuo nome (facoltativo)",
   playGuest: "🎉 Gioca come ospite",
   orSaveAccount: "oppure salva il tuo account",
   signupAndPlay: "Registrati e gioca",
@@ -21,6 +21,11 @@ const it = {
   toSignup: "Non hai un account? Registrati",
   continueGoogle: "Continua con Google",
   nickTooShort: "Scegli un nickname (almeno 2 caratteri).",
+  errInvalidLogin: "Email o password non corretti.",
+  errEmailTaken: "Email già registrata: usa «Accedi» invece di registrarti.",
+  errWeakPassword: "Password troppo corta (almeno 6 caratteri).",
+  errGoogleNotReady: "Login con Google non ancora attivo. Usa ospite o email.",
+  errFillFields: "Inserisci email e password.",
   disclaimer:
     "Gioca responsabilmente. Tutte le carte funzionano anche con bevande analcoliche. Se bevi, non guidare. 18+",
   disclaimerShort:
@@ -82,7 +87,7 @@ const en: typeof it = {
     "The WOOH Game is an adults-only party game. Play responsibly: every card works with non-alcoholic drinks too.",
   ageYes: "Yes, I'm 18+",
   ageNo: "No, I'll leave",
-  nicknamePlaceholder: "Your nickname",
+  nicknamePlaceholder: "Your name (optional)",
   playGuest: "🎉 Play as guest",
   orSaveAccount: "or save your account",
   signupAndPlay: "Sign up and play",
@@ -91,6 +96,11 @@ const en: typeof it = {
   toSignup: "No account? Sign up",
   continueGoogle: "Continue with Google",
   nickTooShort: "Pick a nickname (at least 2 characters).",
+  errInvalidLogin: "Wrong email or password.",
+  errEmailTaken: "Email already registered: use “Log in” instead.",
+  errWeakPassword: "Password too short (at least 6 characters).",
+  errGoogleNotReady: "Google login isn't active yet. Use guest or email.",
+  errFillFields: "Enter email and password.",
   disclaimer:
     "Play responsibly. Every card works with non-alcoholic drinks too. If you drink, don't drive. 18+",
   disclaimerShort:
@@ -146,6 +156,18 @@ export type Dict = typeof it;
 
 export function getDict(locale: Locale): Dict {
   return DICT[locale] ?? DICT.it;
+}
+
+/** Traduce i messaggi d'errore (inglese) di Supabase Auth in testo amichevole. */
+export function friendlyAuthError(dict: Dict, msg: string): string {
+  const m = (msg || "").toLowerCase();
+  if (m.includes("invalid login") || m.includes("invalid credentials")) return dict.errInvalidLogin;
+  if (m.includes("already registered") || m.includes("already exists") || m.includes("user already"))
+    return dict.errEmailTaken;
+  if (m.includes("password")) return dict.errWeakPassword;
+  if (m.includes("provider is not enabled") || m.includes("unsupported provider") || m.includes("validation_failed"))
+    return dict.errGoogleNotReady;
+  return msg || "Errore. Riprova.";
 }
 
 export function cardTypeLabel(dict: Dict, type: string): string {

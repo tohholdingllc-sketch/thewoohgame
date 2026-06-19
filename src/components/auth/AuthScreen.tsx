@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { AgeGate } from "@/components/auth/AgeGate";
 import { LocaleToggle } from "@/components/LocaleToggle";
-import { AVATARS } from "@/lib/avatars";
+import { AVATARS, avatarById } from "@/lib/avatars";
 import { NICKNAME_COLORS } from "@/lib/brand";
-import { getDict } from "@/lib/i18n";
+import { friendlyAuthError, getDict } from "@/lib/i18n";
 import type { Locale } from "@/lib/types";
 
 const AGE_KEY = "wooh_age_ok";
@@ -28,6 +28,7 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
   const [mode, setMode] = useState<"signup" | "login">("signup");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const errorRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     // localStorage non è disponibile in SSR: lettura sicura dopo il mount.
@@ -40,25 +41,32 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
     setAgeOk(true);
   }
 
+  // Nickname FACOLTATIVO: se vuoto ne generiamo uno divertente dall'avatar
+  // scelto (es. "Volpe42"), così "Gioca" e "Registrati" non si bloccano mai.
+  function effectiveNick() {
+    const n = nickname.trim();
+    if (n.length >= 2) return n;
+    return `${avatarById(avatarId).label}${1 + Math.floor(Math.random() * 98)}`;
+  }
+
   const meta = () => ({
-    nickname: nickname.trim(),
+    nickname: effectiveNick(),
     avatar_id: avatarId,
     nickname_color: color,
     is_adult: true,
   });
 
-  function needNick() {
-    if (nickname.trim().length < 2) {
-      setError(d.nickTooShort);
-      return false;
-    }
-    return true;
+  function showError(msg: string) {
+    setError(msg);
+    setBusy(false);
+    requestAnimationFrame(() =>
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }),
+    );
   }
 
   function done(err: { message: string } | null) {
     if (err) {
-      setError(err.message);
-      setBusy(false);
+      showError(friendlyAuthError(d, err.message));
       return;
     }
     window.location.assign(nextJoin ? `/join?code=${encodeURIComponent(nextJoin)}` : "/play");
@@ -66,7 +74,6 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
 
   async function playAsGuest() {
     setError(null);
-    if (!needNick()) return;
     setBusy(true);
     const { error } = await supabase.auth.signInAnonymously({ options: { data: meta() } });
     done(error);
@@ -74,13 +81,15 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
 
   async function submitAccount() {
     setError(null);
+    if (!email.trim() || !password) {
+      showError(d.errFillFields);
+      return;
+    }
+    setBusy(true);
     if (mode === "signup") {
-      if (!needNick()) return;
-      setBusy(true);
       const { error } = await supabase.auth.signUp({ email, password, options: { data: meta() } });
       done(error);
     } else {
-      setBusy(true);
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       done(error);
     }
@@ -93,10 +102,7 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
       provider: "google",
       options: { redirectTo: `${location.origin}/auth/callback` },
     });
-    if (error) {
-      setError(error.message);
-      setBusy(false);
-    }
+    if (error) showError(friendlyAuthError(d, error.message));
   }
 
   if (ageOk === null) return <div className="flex-1" />;
@@ -215,7 +221,12 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
         </div>
 
         {error ? (
-          <p className="w-full rounded-xl bg-magenta/15 px-4 py-2 text-center text-sm text-magenta">{error}</p>
+          <p
+            ref={errorRef}
+            className="w-full rounded-xl bg-magenta/15 px-4 py-2 text-center text-sm text-magenta"
+          >
+            {error}
+          </p>
         ) : null}
 
         <p className="mt-auto max-w-xs text-center text-xs leading-relaxed text-ink-faint">
