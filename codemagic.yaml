@@ -30,7 +30,7 @@ workflows:
           npm run build
           npx cap sync android
       - name: Gradle assembleDebug
-        script: cd android && ./gradlew assembleDebug
+        script: cd android && chmod +x ./gradlew && ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/**/*.apk
 
@@ -55,7 +55,7 @@ workflows:
           npm run build
           npx cap sync android
       - name: Gradle bundleRelease (firmato)
-        script: cd android && ./gradlew bundleRelease
+        script: cd android && chmod +x ./gradlew && ./gradlew bundleRelease
     artifacts:
       - android/app/build/outputs/**/*.aab
 
