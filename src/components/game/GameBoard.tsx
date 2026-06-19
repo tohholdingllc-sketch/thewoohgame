@@ -175,6 +175,7 @@ export function GameBoard({
           style={{
             borderColor: turn.nickname_color ?? "#ff5da2",
             backgroundColor: `${turn.nickname_color ?? "#ff5da2"}26`,
+            boxShadow: `0 0 16px ${turn.nickname_color ?? "#ff5da2"}66`,
           }}
         >
           {d.turnOf(turn.nickname)}
@@ -191,30 +192,49 @@ export function GameBoard({
         {idx + 1} / {len}
       </div>
 
-      <div
-        key={idx}
-        className="flex flex-1 flex-col items-center justify-center gap-6 text-center"
-        style={{ animation: "card-in 0.28s ease-out" }}
-      >
-        {isWooh ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={wolfSrc(wolfForIndex(idx))}
-            alt="Lupo WOOH"
-            className="h-44 w-auto drop-shadow-[0_8px_0_rgba(0,0,0,0.2)]"
-            style={{ animation: "wooh-pop 0.5s ease-out" }}
-          />
-        ) : (
-          <span className="text-6xl">{emoji}</span>
-        )}
-        <span className="rounded-full bg-surface-2 px-4 py-1 font-display text-sm uppercase tracking-widest text-ink-soft">
-          {cardTypeLabel(d, card.type)}
-        </span>
-        <p className="max-w-md font-display text-3xl leading-tight text-white sm:text-4xl">{text}</p>
+      <div className="flex flex-1 items-center justify-center py-1">
+        <div
+          key={idx}
+          className="flex w-full max-w-md flex-col items-center gap-5 rounded-[28px] border-2 border-magenta/45 bg-surface px-6 py-9 text-center"
+          style={{
+            boxShadow:
+              "0 0 30px rgba(255,93,162,0.30), 0 0 80px rgba(61,214,208,0.08), inset 0 0 28px rgba(139,92,246,0.10)",
+            animation: "card-in 0.28s ease-out",
+          }}
+        >
+          {isWooh ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={wolfSrc(wolfForIndex(idx))}
+              alt="Lupo WOOH"
+              className="h-40 w-auto"
+              style={{ animation: "wooh-pop 0.5s ease-out" }}
+            />
+          ) : (
+            <span className="text-6xl" style={{ filter: "drop-shadow(0 0 16px rgba(255,255,255,0.22))" }}>
+              {emoji}
+            </span>
+          )}
+          <span
+            className="rounded-full border-2 border-cyan px-4 py-1 font-display text-sm uppercase tracking-widest text-cyan"
+            style={{ boxShadow: "0 0 12px rgba(61,214,208,0.45)", textShadow: "0 0 10px rgba(61,214,208,0.5)" }}
+          >
+            {cardTypeLabel(d, card.type)}
+          </span>
+          <p
+            className="font-display text-2xl leading-snug text-white sm:text-3xl"
+            style={{ textShadow: "0 0 22px rgba(167,139,250,0.40)" }}
+          >
+            {text}
+          </p>
+        </div>
       </div>
 
       <div className="mt-4 flex flex-col items-center gap-3">
-        <div className="flex items-center gap-2 rounded-full bg-night/40 px-4 py-2">
+        <div
+          className="flex items-center gap-2 rounded-full border-2 border-orange/60 bg-orange/10 px-4 py-2"
+          style={{ boxShadow: "0 0 14px rgba(255,138,61,0.40)" }}
+        >
           <span className="text-xl" aria-hidden="true">{"🔥".repeat(Math.max(1, card.penalty))}</span>
           <span className="font-display text-lg text-white">{card.penalty} WOOH</span>
           <span className="text-xs text-ink-faint">{d.woohIfSkip}</span>
