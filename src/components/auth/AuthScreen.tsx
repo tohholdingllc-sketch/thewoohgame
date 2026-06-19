@@ -30,6 +30,8 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // localStorage non è disponibile in SSR: lettura sicura dopo il mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAgeOk(localStorage.getItem(AGE_KEY) === "1");
   }, []);
 

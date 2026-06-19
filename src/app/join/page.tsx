@@ -42,6 +42,7 @@ function JoinInner() {
   // All'apertura: se non loggato -> vai al login conservando il codice; se
   // loggato e c'è un codice nel link -> entra automaticamente.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocale(normalizeLocale(document.cookie.match(/wooh_locale=([^;]+)/)?.[1]));
     (async () => {
       const {

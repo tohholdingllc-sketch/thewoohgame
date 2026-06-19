@@ -1,12 +1,8 @@
-import type { WoohVariant } from "@/components/WoohEmoji";
-
 /** Avatar giocatore. `img` = PNG in /public/avatars (generati con Higgsfield). */
 export type Avatar = {
   id: string;
   label: string;
   img?: string;
-  wooh?: WoohVariant;
-  emoji?: string;
 };
 
 const LIST: [string, string][] = [

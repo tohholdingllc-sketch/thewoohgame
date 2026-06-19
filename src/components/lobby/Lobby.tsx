@@ -28,12 +28,14 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   const [cardsById, setCardsById] = useState<Record<string, CardRow>>({});
   const [manualName, setManualName] = useState("");
   const [copied, setCopied] = useState(false);
-  const [inviteUrl, setInviteUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const d = getDict(locale);
   const isMaster = game.master_id === userId;
   const selected = game.selected_decks ?? [];
+  const queueLen = (game.card_queue ?? []).length;
+  const inviteUrl =
+    typeof window !== "undefined" ? `${window.location.origin}/join?code=${game.code}` : "";
 
   const refetchPlayers = useCallback(async () => {
     const { data } = await supabase
@@ -85,11 +87,8 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
     return () => {
       active = false;
     };
-  }, [supabase, game.status, (game.card_queue ?? []).length]);
-
-  useEffect(() => {
-    setInviteUrl(`${location.origin}/join?code=${game.code}`);
-  }, [game.code]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supabase, game.status, queueLen]);
 
   async function toggleDeck(id: string) {
     if (!isMaster) return;
