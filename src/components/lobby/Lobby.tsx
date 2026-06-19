@@ -98,6 +98,10 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
     await supabase.from("games").update({ selected_decks: next }).eq("id", game.id);
   }
 
+  async function kickPlayer(playerId: string) {
+    await supabase.from("game_players").delete().eq("id", playerId);
+  }
+
   async function addManual() {
     const n = manualName.trim();
     if (!n) return;
@@ -169,13 +173,24 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
           </h2>
           <div className="flex flex-wrap gap-4">
             {players.map((p) => (
-              <PlayerAvatar
-                key={p.id}
-                avatarId={p.avatar_id}
-                color={p.nickname_color}
-                name={p.nickname + (p.profile_id === game.master_id ? " 👑" : "")}
-                size={64}
-              />
+              <div key={p.id} className="relative">
+                <PlayerAvatar
+                  avatarId={p.avatar_id}
+                  color={p.nickname_color}
+                  name={p.nickname + (p.profile_id === game.master_id ? " 👑" : "")}
+                  size={64}
+                />
+                {isMaster && p.profile_id !== userId ? (
+                  <button
+                    type="button"
+                    onClick={() => kickPlayer(p.id)}
+                    aria-label={`Espelli ${p.nickname}`}
+                    className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-night bg-magenta text-sm font-bold leading-none text-white"
+                  >
+                    ×
+                  </button>
+                ) : null}
+              </div>
             ))}
           </div>
         </section>

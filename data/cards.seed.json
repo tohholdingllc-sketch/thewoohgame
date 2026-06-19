@@ -986,6 +986,1117 @@
         "it": "Fai air-guitar per 10 secondi come a un concerto rock. Se non lo fai, bevi.",
         "en": "Play air guitar for 10 seconds like at a rock concert. Don't, and drink."
       }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai dimenticato il nome di qualcuno appena conosciuto. Chi l'ha fatto, beve.",
+        "en": "Never have I ever forgotten someone's name right after meeting them. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai fatto finta di essere al telefono per evitare qualcuno. Chi l'ha fatto, beve.",
+        "en": "Never have I ever faked a phone call to avoid someone. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai riso in un momento totalmente sbagliato. Chi l'ha fatto, beve.",
+        "en": "Never have I ever laughed at the worst possible moment. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai mangiato qualcosa caduto per terra. Chi l'ha fatto, beve.",
+        "en": "Never have I ever eaten something off the floor. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai mentito sul mio peso o sulla mia altezza. Chi l'ha fatto, beve.",
+        "en": "Never have I ever lied about my weight or height. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai finto di conoscere una canzone per non fare brutta figura. Chi l'ha fatto, beve.",
+        "en": "Never have I ever faked knowing a song to save face. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai sbirciato il telefono di qualcun altro. Chi l'ha fatto, beve.",
+        "en": "Never have I ever peeked at someone else's phone. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai detto 'sto arrivando' mentre ero ancora a letto. Chi l'ha fatto, beve.",
+        "en": "Never have I ever said 'on my way' while still in bed. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai parlato male di qualcuno e poi l'ho salutato sorridendo. Chi l'ha fatto, beve.",
+        "en": "Never have I ever trash-talked someone then smiled at them. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai fatto un acquisto inutile di notte. Chi l'ha fatto, beve.",
+        "en": "Never have I ever made a useless purchase late at night. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 cose che fai SEMPRE prima di dormire. Se non ne dici 3, bevi.",
+        "en": "Name 3 things you ALWAYS do before sleeping. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 app che apri più spesso. Se non ne dici 3, bevi.",
+        "en": "Name the 3 apps you open most. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 cibi che porteresti su un'isola deserta. Se non ne dici 3, bevi.",
+        "en": "Name 3 foods you'd take to a desert island. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 cose che ti fanno ridere ogni volta. Se non ne dici 3, bevi.",
+        "en": "Name 3 things that make you laugh every time. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 personaggi famosi che inviteresti a cena. Se non ne dici 3, bevi.",
+        "en": "Name 3 famous people you'd invite to dinner. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Fai un highfive a {player} e inventatevi una mossa segreta. Se sbagliate, bevete.",
+        "en": "High-five {player} and invent a secret handshake. Mess up, you both drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Racconta a {player} il tuo primo ricordo d'infanzia. Se non te lo ricordi, bevi.",
+        "en": "Tell {player} your earliest childhood memory. Can't remember? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Fai i complimenti a {player} per qualcosa che indossa. Se esiti, bevi.",
+        "en": "Compliment {player} on something they're wearing. Hesitate? Drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "sinonimi",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "A turno, dite un sinonimo di \"divertente\". Il primo che non sa, beve.",
+        "en": "Take turns saying a synonym for \"fun\". First one stuck, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "sinonimi",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "A turno, dite un modo di dire \"sei bellissimo\". Il primo che non sa, beve.",
+        "en": "Take turns saying a way to say \"you look great\". First one stuck, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "sinonimi",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "A turno, dite una bevanda alcolica. Il primo che non sa, beve.",
+        "en": "Take turns naming an alcoholic drink. First one stuck, drinks."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, vietato usare il telefono. Chi lo tocca, beve.",
+        "en": "RULE: until the next rule, no phones. Touch yours, drink."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, dovete ringraziare ogni volta che bevete. Chi dimentica, beve ancora.",
+        "en": "RULE: until the next rule, say thanks every time you drink. Forget, drink again."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: scegliete una parola vietata. Chi la dice, beve. Vale fino alla prossima regola.",
+        "en": "RULE: pick a banned word. Whoever says it drinks. Until the next rule."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "wooh",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "WOOH di benvenuto: fate un'ola tutti insieme e urlate WOOH. L'ultimo beve 1 WOOH.",
+        "en": "Welcome WOOH: do a group wave and shout WOOH. The last one drinks 1 WOOH."
+      }
+    },
+    {
+      "deck": "start",
+      "type": "wooh",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Tutti puntano il dito verso il cielo e urlano WOOH. Chi ride per primo, beve.",
+        "en": "Everyone point a finger to the sky and shout WOOH. First to laugh, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai pianto per una serie TV. Chi l'ha fatto, beve.",
+        "en": "Never have I ever cried over a TV series. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai googlato me stesso. Chi l'ha fatto, beve.",
+        "en": "Never have I ever googled myself. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai finto un orgasmo... di gioia per un regalo. Chi l'ha fatto, beve.",
+        "en": "Never have I ever faked extreme joy over a gift. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai inviato un messaggio e subito dopo l'ho cancellato. Chi l'ha fatto, beve.",
+        "en": "Never have I ever sent a message then instantly deleted it. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai dato buca all'ultimo minuto inventando una scusa. Chi l'ha fatto, beve.",
+        "en": "Never have I ever bailed last minute with a fake excuse. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai litigato per una cavolata e poi non ricordavo il motivo. Chi l'ha fatto, beve.",
+        "en": "Never have I ever fought over nothing and forgot why. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai fatto uno screenshot di una chat per mostrarla agli amici. Chi l'ha fatto, beve.",
+        "en": "Never have I ever screenshotted a chat to show friends. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai mangiato l'ultima fetta senza chiedere. Chi l'ha fatto, beve.",
+        "en": "Never have I ever eaten the last slice without asking. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è la bugia più grande che hai detto ai tuoi? Rispondi o bevi.",
+        "en": "What's the biggest lie you've told your parents? Answer or drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Chi qui chiameresti per nascondere un cadavere (metaforico)? Rispondi o bevi.",
+        "en": "Who here would you call to hide a (metaphorical) body? Answer or drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è il tuo guilty pleasure più imbarazzante? Rispondi o bevi.",
+        "en": "What's your most embarrassing guilty pleasure? Answer or drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Se potessi leggere nel pensiero di una persona qui, chi? Rispondi o bevi.",
+        "en": "If you could read one person's mind here, whose? Answer or drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è la cosa più folle che faresti per un milione di euro? Rispondi o bevi.",
+        "en": "What's the craziest thing you'd do for a million euros? Answer or drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è l'ultima ricerca imbarazzante nel tuo telefono? Rispondi o bevi 2 WOOH.",
+        "en": "What's the last embarrassing search on your phone? Answer or drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 cose che cambieresti del mondo. Se non ne dici 3, bevi.",
+        "en": "Name 3 things you'd change about the world. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 talenti nascosti che hai. Se non ne dici 3, bevi.",
+        "en": "Name 3 hidden talents you have. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "tre_cose",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Di' 3 cose che ti fanno arrabbiare all'istante. Se non ne dici 3, bevi.",
+        "en": "Name 3 things that instantly make you angry. Can't name 3? Drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Fai un'imitazione di {player} per 10 secondi. Se non ride nessuno, bevi.",
+        "en": "Imitate {player} for 10 seconds. If nobody laughs, you drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Lascia che {player} scelga il prossimo da bere. Se protesti, bevi tu.",
+        "en": "Let {player} choose who drinks next. Protest, and you drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Scambia di posto con {player} e imita come si siede. Se sbagli, bevi.",
+        "en": "Swap seats with {player} and mimic how they sit. Wrong? Drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, si parla solo sussurrando. Chi alza la voce, beve.",
+        "en": "RULE: until the next rule, only whispering. Raise your voice, drink."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, ogni risata costa un WOOH a chi ride.",
+        "en": "RULE: until the next rule, every laugh costs the laugher a WOOH."
+      }
+    },
+    {
+      "deck": "mood",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: vietato dire 'io'. Chi lo dice, beve. Fino alla prossima regola.",
+        "en": "RULE: saying 'I' is banned. Say it, drink. Until the next rule."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai limonato con due persone diverse nella stessa serata. Chi l'ha fatto, beve.",
+        "en": "Never have I ever made out with two different people in one night. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai avuto un sogno hot con qualcuno che conosco. Chi l'ha fatto, beve.",
+        "en": "Never have I ever had a steamy dream about someone I know. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai inviato un messaggio piccante alla persona sbagliata. Chi l'ha fatto, beve.",
+        "en": "Never have I ever sent a spicy text to the wrong person. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai flirtato per ottenere qualcosa. Chi l'ha fatto, beve.",
+        "en": "Never have I ever flirted to get something. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai dato un nome a qualcuno in rubrica per non farmi scoprire. Chi l'ha fatto, beve.",
+        "en": "Never have I ever saved someone under a fake contact name. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Chi nella stanza baceresti per una sfida? Rispondi o bevi 2 WOOH.",
+        "en": "Who in the room would you kiss on a dare? Answer or drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è il complimento più sexy che ti hanno fatto? Rispondi o bevi.",
+        "en": "What's the sexiest compliment you've received? Answer or drink."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Dove vorresti essere baciato proprio ora? Rispondi o bevi 2 WOOH.",
+        "en": "Where would you want to be kissed right now? Answer or drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è il tuo tratto fisico preferito in una persona? Rispondi o bevi.",
+        "en": "What's your favorite physical trait in a person? Answer or drink."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Mima la tua mossa di seduzione migliore verso {player}. Se ti vergogni, bevi 2 WOOH.",
+        "en": "Show {player} your best seduction move. Too shy? Drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Sussurra a {player} cosa ordineresti per una cena romantica. Se rifiuti, bevi.",
+        "en": "Whisper to {player} what you'd order for a romantic dinner. Refuse, drink."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Guarda {player} negli occhi e fai la faccia più sexy che hai per 5 secondi. Se ridi, bevi.",
+        "en": "Look into {player}'s eyes and give your sexiest face for 5 seconds. Laugh, drink."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Fai un massaggio alle spalle a {player} per 15 secondi. Se rifiuti, bevi 2 WOOH.",
+        "en": "Give {player} a 15-second shoulder massage. Refuse, drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, ogni volta che bevi devi fare l'occhiolino a qualcuno.",
+        "en": "RULE: until the next rule, every time you drink you must wink at someone."
+      }
+    },
+    {
+      "deck": "hot",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, vietato incrociare le braccia. Chi lo fa, beve.",
+        "en": "RULE: until the next rule, no crossing your arms. Do it, drink."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è stato il nostro momento più bello finora? Rispondi o bevi.",
+        "en": "What's been our best moment so far? Answer or drink."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Cosa ti ho fatto pensare la prima volta che mi hai visto? Rispondi o bevi.",
+        "en": "What did you think the first time you saw me? Answer or drink."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Una cosa che vorresti facessimo più spesso? Rispondi o bevi.",
+        "en": "One thing you wish we did more often? Answer or drink."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è la cosa più sexy che faccio senza accorgermene? Rispondi o bevi 2 WOOH.",
+        "en": "What's the sexiest thing I do without realizing? Answer or drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Datevi un bacio della durata di un sorso (a testa). Se vi staccate prima, bevete il doppio.",
+        "en": "Kiss for as long as one sip lasts (each). Break early, drink double."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Disegnate insieme un cuore al buio (occhi chiusi). Se viene orribile, bevete.",
+        "en": "Draw a heart together with eyes closed. If it's awful, drink."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Ditevi a vicenda una cosa che vi fa impazzire dell'altro. Se arrossite, bevete.",
+        "en": "Tell each other one thing that drives you crazy about them. Blush? Drink."
+      }
+    },
+    {
+      "deck": "coppia",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 1,
+      "min_players": 2,
+      "text": {
+        "it": "Ballate lenti per 20 secondi senza musica. Se ridete, bevete.",
+        "en": "Slow dance for 20 seconds with no music. Laugh, drink."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "L'ultimo che alza il bicchiere beve.",
+        "en": "Last one to raise their glass drinks."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Il primo che trova qualcosa di verde e lo porta al centro distribuisce 2 WOOH.",
+        "en": "First to bring something green to the center hands out 2 WOOH."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Chi è seduto più lontano dalla porta beve.",
+        "en": "Whoever sits farthest from the door drinks."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Tutti indicano l'oggetto più brutto nella stanza. Chi indica diverso dalla maggioranza, beve.",
+        "en": "Everyone point at the ugliest object in the room. Minority points, drink."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Chi ha le scarpe più sporche beve. Mostratele.",
+        "en": "Whoever has the dirtiest shoes drinks. Show them."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Il primo che spegne/accende una luce distribuisce 1 WOOH.",
+        "en": "First to flick a light switch hands out 1 WOOH."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Chi ha la batteria del telefono più bassa beve.",
+        "en": "Whoever has the lowest phone battery drinks."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: fino alla prossima regola, ci si alza in piedi ogni volta che entra qualcuno nella stanza.",
+        "en": "RULE: until the next rule, stand up whenever someone enters the room."
+      }
+    },
+    {
+      "deck": "ambiente",
+      "type": "regola",
+      "is_persistent": true,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "REGOLA: il bicchiere va tenuto sempre con due mani. Chi usa una mano, beve.",
+        "en": "RULE: hold your glass with two hands always. One hand, drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è la tua più grande paura? Rispondi o bevi 2 WOOH.",
+        "en": "What's your biggest fear? Answer or drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "C'è qualcosa che rifaresti diversamente nella tua vita? Rispondi o bevi.",
+        "en": "Is there something you'd do differently in your life? Answer or drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è il complimento che ricordi ancora oggi? Rispondi o bevi.",
+        "en": "What's a compliment you still remember today? Answer or drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Quando ti sei sentito più vivo? Rispondi o bevi.",
+        "en": "When did you feel most alive? Answer or drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Cosa diresti a te stesso di 10 anni fa? Rispondi o bevi.",
+        "en": "What would you tell your self from 10 years ago? Answer or drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è una cosa per cui sei grato stasera? Rispondi o bevi.",
+        "en": "What's one thing you're grateful for tonight? Answer or drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Chi vorresti che fosse qui stasera? Rispondi o bevi.",
+        "en": "Who do you wish were here tonight? Answer or drink."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "domanda",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Qual è il sogno che non hai mai detto a nessuno? Rispondi o bevi 2 WOOH.",
+        "en": "What's the dream you've never told anyone? Answer or drink 2 WOOH."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai perdonato qualcuno senza dirglielo. Chi l'ha fatto, beve.",
+        "en": "Never have I ever forgiven someone without telling them. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai tenuto un rancore per anni. Chi l'ha fatto, beve.",
+        "en": "Never have I ever held a grudge for years. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "profondo",
+      "type": "io_non_ho_mai",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Io non ho mai cambiato idea su una persona dopo averla conosciuta meglio. Chi l'ha fatto, beve.",
+        "en": "Never have I ever changed my mind about someone after knowing them better. Whoever has, drinks."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Canta una canzone a tua scelta cambiando tutte le parole con 'WOOH'. Se ti fermi, bevi.",
+        "en": "Sing any song replacing every word with 'WOOH'. Stop, drink."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Fai il beatbox per 10 secondi. Se non ci riesci, bevi.",
+        "en": "Beatbox for 10 seconds. Can't? Drink."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Canta come se fossi arrabbiatissimo. Se ridi, bevi.",
+        "en": "Sing as if you're furious. Laugh, drink."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Inventa un jingle pubblicitario per il WOOH Game. Se fa schifo, bevi (decide il gruppo).",
+        "en": "Invent an ad jingle for the WOOH Game. If it's bad, drink (group decides)."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Balla la tua mossa di ballo peggiore con orgoglio per 10 secondi. Se ti fermi, bevi.",
+        "en": "Proudly do your worst dance move for 10 seconds. Stop, drink."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Canta una canzone di Natale, a tema attuale o meno. Se sbagli le parole, bevi.",
+        "en": "Sing a Christmas carol, in season or not. Wrong words? Drink."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "azione",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "Imita il verso di un animale a ritmo per 10 secondi. Se ridi, bevi.",
+        "en": "Make an animal sound to a beat for 10 seconds. Laugh, drink."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "sinonimi",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "A turno, dite il nome di un cantante. Il primo che non sa, beve.",
+        "en": "Take turns naming a singer. First one stuck, drinks."
+      }
+    },
+    {
+      "deck": "karaoke",
+      "type": "sinonimi",
+      "is_persistent": false,
+      "needs_target": 0,
+      "min_players": 2,
+      "text": {
+        "it": "A turno, cantate una parola di una canzone famosa a testa, formando il testo. Chi sbaglia, beve.",
+        "en": "Take turns singing one word each of a famous song. Mess up, drink."
+      }
     }
   ]
 }

@@ -44,5 +44,5 @@ sql += data.cards
   .join(",\n");
 sql += ";\n";
 
-fs.writeFileSync("supabase/migrations/20260619100700_expand_content.sql", sql, "utf8");
-console.log(`OK: re-seed ${data.decks.length} mazzi, ${data.cards.length} carte (con penalty) → 20260619100700_expand_content.sql`);
+fs.writeFileSync("supabase/migrations/20260619100800_content_v2.sql", sql, "utf8");
+console.log(`OK: re-seed ${data.decks.length} mazzi, ${data.cards.length} carte → 20260619100800_content_v2.sql`);
