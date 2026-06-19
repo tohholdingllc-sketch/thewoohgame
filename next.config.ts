@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Fissa la root del progetto: evita che Next scelga la cartella sbagliata
-  // quando esiste un package-lock.json in una cartella superiore.
+  // Export statico: l'app diventa HTML/JS bundle-abile da Capacitor (app native),
+  // e resta deployabile come sito statico su Vercel. Tutto gira client-side (Supabase).
+  output: "export",
+  images: { unoptimized: true },
   turbopack: {
     root: import.meta.dirname,
   },

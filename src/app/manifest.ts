@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { BRAND } from "@/lib/brand";
 
+// Necessario con output: "export" (manifest generato staticamente).
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: BRAND.name,
@@ -10,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#8a27d6",
+    background_color: "#0a0716",
     theme_color: BRAND.themeColor,
     lang: "it",
     categories: ["games", "entertainment", "social"],

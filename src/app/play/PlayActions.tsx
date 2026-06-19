@@ -25,7 +25,7 @@ export function PlayActions({ locale = "it" }: { locale?: Locale }) {
       setBusy(false);
       return;
     }
-    router.push(`/game/${data}`);
+    router.push(`/game?code=${data}`);
   }
 
   async function signOut() {

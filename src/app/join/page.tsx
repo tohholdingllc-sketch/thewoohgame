@@ -34,7 +34,7 @@ function JoinInner() {
         setChecking(false);
         return;
       }
-      router.push(`/game/${data}`);
+      router.push(`/game?code=${data}`);
     },
     [supabase, router, d.gameNotFound, d.gameStarted],
   );
