@@ -6,18 +6,18 @@
   I font arrivano da next/font (variabili --font-display / --font-body, vedi layout.tsx).
 */
 @theme {
-  /* --- Superfici (notte viola) --- */
-  --color-night: #1b1230;
-  --color-night-top: #241734;
-  --color-surface: #2a1d49;
-  --color-surface-2: #34255a;
-  --color-line: #45356b;
+  /* --- Superfici (viola acceso, stile idea-screen) --- */
+  --color-night: #8a27d6;
+  --color-night-top: #a445f0;
+  --color-surface: #9747e0;
+  --color-surface-2: #7c2bce;
+  --color-line: #2e0f52;
 
   /* --- Testo --- */
   --color-ink: #ffffff;
-  --color-ink-soft: #c9bfe0;
-  --color-ink-faint: #8d80ad;
-  --color-ink-dark: #1b1230; /* testo su accenti chiari */
+  --color-ink-soft: #efe6ff;
+  --color-ink-faint: #d2bcf2;
+  --color-ink-dark: #2a0f4d; /* testo su superfici chiare/accenti */
 
   /* --- Accenti vivaci --- */
   --color-yellow: #ffd23f;

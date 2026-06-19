@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Reference/design assets (solo locali) — rimuovi questa riga per tracciarli nel repo
+/images/
+
 # vercel
 .vercel
 

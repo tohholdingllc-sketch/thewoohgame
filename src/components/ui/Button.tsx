@@ -28,7 +28,7 @@ const variants: Record<Variant, string> = {
     "bg-magenta text-ink-dark shadow-[0_6px_0_0_#c73b79] active:shadow-[0_2px_0_0_#c73b79]",
   lime: "bg-lime text-ink-dark shadow-[0_6px_0_0_#6fb23b] active:shadow-[0_2px_0_0_#6fb23b]",
   ghost:
-    "bg-surface-2 text-ink border-2 border-line shadow-[0_6px_0_0_#241734] active:shadow-[0_2px_0_0_#241734]",
+    "bg-surface-2 text-ink border-2 border-line shadow-[0_6px_0_0_#1c0838] active:shadow-[0_2px_0_0_#1c0838]",
 };
 
 const sizes: Record<Size, string> = {

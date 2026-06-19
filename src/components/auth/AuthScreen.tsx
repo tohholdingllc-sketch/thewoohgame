@@ -11,7 +11,7 @@ import { NICKNAME_COLORS } from "@/lib/brand";
 
 const AGE_KEY = "wooh_age_ok";
 const inputCls =
-  "w-full rounded-2xl border-2 border-line bg-surface-2 px-4 h-12 text-ink placeholder:text-ink-faint focus:border-yellow focus:outline-none";
+  "w-full rounded-2xl border-2 border-line bg-white px-4 h-12 text-ink-dark font-semibold placeholder:text-ink-dark/40 focus:border-magenta focus:outline-none";
 
 export function AuthScreen() {
   const router = useRouter();
@@ -107,14 +107,21 @@ export function AuthScreen() {
   return (
     <main className="flex-1 flex flex-col items-center px-6 py-8 pad-safe-t pad-safe-b">
       <div className="flex w-full max-w-md flex-1 flex-col items-center gap-7">
-        {/* Wordmark */}
-        <h1 className="font-display text-5xl leading-none">
-          <span className="text-yellow">W</span>
-          <span className="text-cyan">O</span>
-          <span className="text-magenta">O</span>
-          <span className="text-lime">H</span>
-          <span className="ml-2 text-2xl tracking-widest text-ink">GAME</span>
-        </h1>
+        {/* Wordmark (logo a pennello: bianco con bordo arancione) */}
+        <div className="flex flex-col items-center leading-none">
+          <span className="font-display text-base tracking-[0.3em] text-white/90">THE</span>
+          <h1
+            className="font-display text-7xl text-white"
+            style={{
+              WebkitTextStroke: "6px #ff8a3d",
+              paintOrder: "stroke",
+              filter: "drop-shadow(0 5px 0 rgba(0,0,0,0.18))",
+            }}
+          >
+            WOOH
+          </h1>
+          <span className="font-display text-2xl tracking-[0.35em] text-white">GAME</span>
+        </div>
 
         {/* Identità */}
         <div className="flex w-full flex-col items-center gap-4">
@@ -162,7 +169,7 @@ export function AuthScreen() {
 
         {/* Gioca come ospite (path primario) */}
         <Button
-          variant="yellow"
+          variant="magenta"
           size="lg"
           className="w-full"
           disabled={busy}
