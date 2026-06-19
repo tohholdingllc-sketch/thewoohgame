@@ -101,6 +101,12 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
     await supabase.from("game_players").delete().eq("id", playerId);
   }
 
+  async function leaveLobby() {
+    const me = players.find((p) => p.profile_id === userId);
+    if (me) await supabase.from("game_players").delete().eq("id", me.id);
+    router.push("/play");
+  }
+
   async function addManual() {
     const n = manualName.trim();
     if (!n) return;
@@ -244,7 +250,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
 
         <button
           type="button"
-          onClick={() => router.push("/play")}
+          onClick={leaveLobby}
           className="mx-auto mt-2 text-sm text-ink-faint underline underline-offset-4"
         >
           {d.leaveLobby}
