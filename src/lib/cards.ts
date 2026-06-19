@@ -7,6 +7,7 @@ export interface CardRow {
   param: { tema?: I18n } | null;
   is_persistent: boolean;
   needs_target: number;
+  penalty: number;
 }
 
 export interface Target {

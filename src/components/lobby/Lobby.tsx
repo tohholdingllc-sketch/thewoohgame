@@ -72,7 +72,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
     (async () => {
       const { data } = await supabase
         .from("cards")
-        .select("id,type,text,param,is_persistent,needs_target")
+        .select("id,type,text,param,is_persistent,needs_target,penalty")
         .in("id", ids);
       if (active && data) {
         const map: Record<string, CardRow> = {};

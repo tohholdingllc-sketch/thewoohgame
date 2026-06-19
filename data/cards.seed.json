@@ -56,7 +56,7 @@
 
   "cards": [
     { "deck": "start", "type": "wooh", "is_persistent": false, "needs_target": 0, "min_players": 3,
-      "text": { "it": "Benvenuti a The WOOH Game! Se hai capito cos'è il WOOH, distribuisci 3 sorsi e tutti insieme urlate WOOH con il tono più assurdo che potete.", "en": "Welcome to The WOOH Game! If you get what WOOH means, hand out 3 sips and everyone shouts WOOH in the most absurd tone possible." } },
+      "text": { "it": "Benvenuti a The WOOH Game! Se hai capito cos'è il WOOH, distribuisci 3 WOOH e tutti insieme urlate WOOH con il tono più assurdo che potete.", "en": "Welcome to The WOOH Game! If you get what WOOH means, hand out 3 WOOH and everyone shouts WOOH in the most absurd tone possible." } },
 
     { "deck": "start", "type": "io_non_ho_mai", "is_persistent": false, "needs_target": 0, "min_players": 3,
       "text": { "it": "Io non ho mai mandato un messaggio alla persona sbagliata. Chi l'ha fatto, beve.", "en": "Never have I ever texted the wrong person. Whoever has, drinks." } },
@@ -91,10 +91,10 @@
       "text": { "it": "REGOLA: fino alla prossima regola, nessuno può chiamare gli altri per nome. Chi sbaglia, beve.", "en": "RULE: until the next rule, no one may call others by name. Slip up, drink." } },
 
     { "deck": "start", "type": "regola", "is_persistent": true, "needs_target": 0, "min_players": 3,
-      "text": { "it": "REGOLA: fino alla prossima regola, ogni volta che qualcuno dice \"sì\" beve un sorso.", "en": "RULE: until the next rule, every time someone says \"yes\" they take a sip." } },
+      "text": { "it": "REGOLA: fino alla prossima regola, ogni volta che qualcuno dice \"sì\" beve un WOOH.", "en": "RULE: until the next rule, every time someone says \"yes\" they take a WOOH." } },
 
     { "deck": "mood", "type": "wooh", "is_persistent": false, "needs_target": 0, "min_players": 3,
-      "text": { "it": "Momento WOOH: l'ultimo che alza le mani e urla WOOH distribuisce 2 sorsi.", "en": "WOOH moment: the last to raise their hands and shout WOOH hands out 2 sips." } },
+      "text": { "it": "Momento WOOH: l'ultimo che alza le mani e urla WOOH distribuisce 2 WOOH.", "en": "WOOH moment: the last to raise their hands and shout WOOH hands out 2 WOOH." } },
 
     { "deck": "mood", "type": "io_non_ho_mai", "is_persistent": false, "needs_target": 0, "min_players": 3,
       "text": { "it": "Io non ho mai mentito sulla mia età. Chi l'ha fatto, beve.", "en": "Never have I ever lied about my age. Whoever has, drinks." } },
@@ -116,7 +116,7 @@
       "text": { "it": "Guarda {player} negli occhi per 10 secondi senza ridere. Se ridi, bevi.", "en": "Look {player} in the eyes for 10 seconds without laughing. Laugh and you drink." } },
 
     { "deck": "mood", "type": "azione", "is_persistent": false, "needs_target": 1, "min_players": 3,
-      "text": { "it": "Lascia che {player} scriva un messaggio dal tuo telefono all'ultima persona con cui hai chattato. Se rifiuti, bevi 3 sorsi.", "en": "Let {player} send a message from your phone to the last person you chatted with. Refuse and drink 3." } },
+      "text": { "it": "Lascia che {player} scriva un messaggio dal tuo telefono all'ultima persona con cui hai chattato. Se rifiuti, bevi 3 WOOH.", "en": "Let {player} send a message from your phone to the last person you chatted with. Refuse and drink 3." } },
 
     { "deck": "mood", "type": "regola", "is_persistent": true, "needs_target": 0, "min_players": 3,
       "text": { "it": "REGOLA: fino alla prossima regola, si può bere solo con la mano sinistra. Chi usa la destra, beve.", "en": "RULE: until the next rule, drink only with your left hand. Use your right, drink." } },
@@ -125,7 +125,7 @@
       "text": { "it": "REGOLA: nominate un \"capitano\". Quando lui beve, bevono tutti. Vale fino alla prossima regola.", "en": "RULE: pick a \"captain\". When they drink, everyone drinks. Until the next rule." } },
 
     { "deck": "hot", "type": "wooh", "is_persistent": false, "needs_target": 0, "min_players": 3,
-      "text": { "it": "WOOH bollente: chi ha il look più hot stasera distribuisce 3 sorsi. Decide il gruppo.", "en": "Spicy WOOH: whoever looks hottest tonight hands out 3 sips. The group decides." } },
+      "text": { "it": "WOOH bollente: chi ha il look più hot stasera distribuisce 3 WOOH. Decide il gruppo.", "en": "Spicy WOOH: whoever looks hottest tonight hands out 3 WOOH. The group decides." } },
 
     { "deck": "hot", "type": "io_non_ho_mai", "is_persistent": false, "needs_target": 0, "min_players": 3,
       "text": { "it": "Io non ho mai baciato qualcuno la prima sera in cui l'ho conosciuto. Chi l'ha fatto, beve.", "en": "Never have I ever kissed someone the first night I met them. Whoever has, drinks." } },
@@ -137,7 +137,7 @@
       "text": { "it": "Di' 3 cose che trovi irresistibili in una persona. Se non ne dici 3, bevi.", "en": "Name 3 things you find irresistible in a person. Can't name 3? Drink." } },
 
     { "deck": "hot", "type": "azione", "is_persistent": false, "needs_target": 1, "min_players": 3,
-      "text": { "it": "Sussurra all'orecchio di {player} la cosa più audace che ti viene in mente. Se non lo fai, bevi 3 sorsi.", "en": "Whisper the boldest thing you can think of in {player}'s ear. Don't, and drink 3." } },
+      "text": { "it": "Sussurra all'orecchio di {player} la cosa più audace che ti viene in mente. Se non lo fai, bevi 3 WOOH.", "en": "Whisper the boldest thing you can think of in {player}'s ear. Don't, and drink 3." } },
 
     { "deck": "hot", "type": "azione", "is_persistent": false, "needs_target": 1, "min_players": 3,
       "text": { "it": "Fai un massaggio alle spalle a {player} per 20 secondi. Se rifiuti, bevi.", "en": "Give {player} a 20-second shoulder massage. Refuse and you drink." } },
@@ -164,19 +164,19 @@
       "text": { "it": "Guarda {player} negli occhi per 30 secondi senza parlare. Chi distoglie lo sguardo per primo, beve.", "en": "Stare into {player}'s eyes for 30 seconds in silence. First to look away, drinks." } },
 
     { "deck": "coppia", "type": "azione", "is_persistent": false, "needs_target": 1, "min_players": 2,
-      "text": { "it": "Dai un bacio sulla guancia o sul collo a {player}, scegli tu dove. Se non lo fai, bevi 2 sorsi.", "en": "Give {player} a kiss on the cheek or neck, your choice. Don't, and drink 2." } },
+      "text": { "it": "Dai un bacio sulla guancia o sul collo a {player}, scegli tu dove. Se non lo fai, bevi 2 WOOH.", "en": "Give {player} a kiss on the cheek or neck, your choice. Don't, and drink 2." } },
 
     { "deck": "coppia", "type": "regola", "is_persistent": true, "needs_target": 0, "min_players": 2,
       "text": { "it": "REGOLA: fino alla prossima regola dovete restare con le mani intrecciate. Chi si stacca, beve.", "en": "RULE: until the next rule you must keep your hands intertwined. Let go, and drink." } },
 
     { "deck": "ambiente", "type": "wooh", "is_persistent": false, "needs_target": 0, "min_players": 3,
-      "text": { "it": "WOOH ambientale: il primo che trova qualcosa di giallo nella stanza e lo alza urlando WOOH distribuisce 2 sorsi.", "en": "Surroundings WOOH: first to find something yellow in the room and raise it shouting WOOH hands out 2 sips." } },
+      "text": { "it": "WOOH ambientale: il primo che trova qualcosa di giallo nella stanza e lo alza urlando WOOH distribuisce 2 WOOH.", "en": "Surroundings WOOH: first to find something yellow in the room and raise it shouting WOOH hands out 2 WOOH." } },
 
     { "deck": "ambiente", "type": "azione", "is_persistent": false, "needs_target": 0, "min_players": 3,
       "text": { "it": "L'ultimo che tocca il pavimento beve. Via!", "en": "Last one to touch the floor drinks. Go!" } },
 
     { "deck": "ambiente", "type": "azione", "is_persistent": false, "needs_target": 0, "min_players": 3,
-      "text": { "it": "Il primo che porta un oggetto rosso al centro del tavolo distribuisce 2 sorsi.", "en": "First to bring a red object to the center of the table hands out 2 sips." } },
+      "text": { "it": "Il primo che porta un oggetto rosso al centro del tavolo distribuisce 2 WOOH.", "en": "First to bring a red object to the center of the table hands out 2 WOOH." } },
 
     { "deck": "ambiente", "type": "azione", "is_persistent": false, "needs_target": 0, "min_players": 3,
       "text": { "it": "Chi ha lo schermo del telefono più rovinato beve. Mostratelo tutti.", "en": "Whoever has the most cracked phone screen drinks. Everyone show it." } },

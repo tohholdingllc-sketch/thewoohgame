@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { WoohEmoji } from "@/components/WoohEmoji";
+import { wolfSrc, wolfForIndex } from "@/lib/wolves";
 import { cardTypeMeta, substituteTargets, type CardRow, type Target } from "@/lib/cards";
 import type { Game, I18n, Locale } from "@/lib/types";
 
@@ -33,13 +33,13 @@ export function GameBoard({
   const ended = game.status === "ended" || idx >= len;
 
   const doAdvance = useCallback(async () => {
-    if (busy) return;
+    if (busy || !isMaster) return;
     setBusy(true);
     await onAdvance();
     setBusy(false);
-  }, [busy, onAdvance]);
+  }, [busy, isMaster, onAdvance]);
 
-  // Desktop: spazio / freccia destra avanzano (solo master)
+  // Desktop: spazio / freccia / invio avanzano (solo master)
   useEffect(() => {
     if (!isMaster || ended) return;
     function onKey(e: KeyboardEvent) {
@@ -52,44 +52,66 @@ export function GameBoard({
     return () => window.removeEventListener("keydown", onKey);
   }, [isMaster, ended, doAdvance]);
 
-  const InfoButton = (
+  // "i" piccola e grigia in alto a destra: c'è ma non disturba
+  const infoButton = (
     <button
       type="button"
-      onClick={() => setShowInfo((s) => !s)}
-      aria-label="Gioco responsabile"
-      className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-surface/60 text-lg pad-safe-t"
+      onClick={(e) => {
+        e.stopPropagation();
+        setShowInfo((s) => !s);
+      }}
+      aria-label="Info: gioco responsabile"
+      className="absolute right-4 top-4 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 font-serif text-sm italic text-white/40"
     >
-      ℹ️
+      i
     </button>
   );
 
-  const InfoOverlay = showInfo ? (
-    <button
-      type="button"
-      onClick={() => setShowInfo(false)}
-      className="absolute inset-0 z-20 flex items-center justify-center bg-night/80 px-8 text-center"
+  const infoOverlay = showInfo ? (
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+        setShowInfo(false);
+      }}
+      className="absolute inset-0 z-20 flex items-center justify-center bg-night/85 px-8 text-center"
     >
       <p className="max-w-sm text-ink-soft">
         Gioca responsabilmente. Tutte le carte funzionano anche con bevande
         analcoliche. Se bevi, non guidare. <span className="text-white">18+</span>
       </p>
-    </button>
+    </div>
   ) : null;
 
   // ---- Schermata di fine partita ----
   if (ended) {
     return (
       <main className="relative flex-1 flex flex-col items-center justify-center gap-7 px-6 py-10 pad-safe-t pad-safe-b text-center">
-        {InfoButton}
-        {InfoOverlay}
-        <WoohEmoji variant="wooh" size={120} style={{ animation: "wooh-pop 0.5s ease-out" }} />
+        {infoButton}
+        {infoOverlay}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={wolfSrc("drunk")}
+          alt="Lupo WOOH"
+          className="h-48 w-auto"
+          style={{ animation: "wooh-pop 0.5s ease-out" }}
+        />
         <div>
           <h1 className="font-display text-4xl text-white">Fine partita!</h1>
           <p className="mt-1 text-ink-soft">Avete fatto WOOH fino in fondo 🍻</p>
         </div>
         <div className="flex w-full max-w-sm flex-col gap-3">
           {isMaster ? (
-            <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={async () => { setBusy(true); await onRestart(); setBusy(false); }}>
+            <Button
+              variant="magenta"
+              size="lg"
+              className="w-full"
+              disabled={busy}
+              onClick={async () => {
+                setBusy(true);
+                await onRestart();
+                setBusy(false);
+              }}
+            >
               🔄 Rigioca
             </Button>
           ) : (
@@ -117,11 +139,17 @@ export function GameBoard({
   const text = substituteTargets(card.text[locale] ?? card.text.it, targets);
   const rule = (game.active_rules?.[0] as I18n | undefined) ?? undefined;
   const isWooh = card.type === "wooh";
+  const lastCard = idx + 1 >= len;
 
   return (
-    <main className="relative flex-1 flex flex-col px-5 py-6 pad-safe-t pad-safe-b">
-      {InfoButton}
-      {InfoOverlay}
+    <main
+      onClick={isMaster ? () => void doAdvance() : undefined}
+      className={`relative flex-1 flex flex-col px-5 py-6 pad-safe-t pad-safe-b ${
+        isMaster ? "cursor-pointer select-none" : ""
+      }`}
+    >
+      {infoButton}
+      {infoOverlay}
 
       {/* Badge regola persistente attiva */}
       {rule ? (
@@ -142,7 +170,13 @@ export function GameBoard({
         style={{ animation: "card-in 0.28s ease-out" }}
       >
         {isWooh ? (
-          <WoohEmoji variant="wooh" size={130} style={{ animation: "wooh-pop 0.5s ease-out" }} />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={wolfSrc(wolfForIndex(idx))}
+            alt="Lupo WOOH"
+            className="h-44 w-auto drop-shadow-[0_8px_0_rgba(0,0,0,0.2)]"
+            style={{ animation: "wooh-pop 0.5s ease-out" }}
+          />
         ) : (
           <span className="text-6xl">{meta.emoji}</span>
         )}
@@ -154,16 +188,19 @@ export function GameBoard({
         </p>
       </div>
 
-      {/* Controlli */}
-      <div className="mt-4 flex flex-col items-center gap-2">
+      {/* In basso: penalità WOOH (se salti la carta) + suggerimento tap */}
+      <div className="mt-4 flex flex-col items-center gap-3">
+        <div className="flex items-center gap-2 rounded-full bg-night/40 px-4 py-2">
+          <span className="text-xl">🔥🔥</span>
+          <span className="font-display text-lg text-white">{card.penalty} WOOH</span>
+          <span className="text-xs text-ink-faint">se salti</span>
+        </div>
         {isMaster ? (
-          <Button variant="magenta" size="lg" className="w-full max-w-md" disabled={busy} onClick={doAdvance}>
-            {idx + 1 >= len ? "Termina 🏁" : "Avanti →"}
-          </Button>
-        ) : (
-          <p className="py-3 text-center text-sm text-ink-soft">
-            Il master sta scorrendo le carte…
+          <p className="text-xs text-ink-faint">
+            {lastCard ? "Tocca per terminare 🏁" : "Tocca lo schermo per la prossima carta"}
           </p>
+        ) : (
+          <p className="text-sm text-ink-soft">Il master sta scorrendo le carte…</p>
         )}
       </div>
     </main>

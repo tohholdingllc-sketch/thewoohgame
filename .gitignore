@@ -37,6 +37,9 @@ yarn-error.log*
 # Reference/design assets (solo locali) — rimuovi questa riga per tracciarli nel repo
 /images/
 
+# Stray del sistema skill (non parte dell'app)
+skills-lock.json
+
 # vercel
 .vercel
 
