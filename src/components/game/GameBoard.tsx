@@ -192,7 +192,7 @@ export function GameBoard({
 
       <div className="mt-4 flex flex-col items-center gap-3">
         <div className="flex items-center gap-2 rounded-full bg-night/40 px-4 py-2">
-          <span className="text-xl">🔥🔥</span>
+          <span className="text-xl" aria-hidden="true">{"🔥".repeat(Math.max(1, card.penalty))}</span>
           <span className="font-display text-lg text-white">{card.penalty} WOOH</span>
           <span className="text-xs text-ink-faint">{d.woohIfSkip}</span>
         </div>

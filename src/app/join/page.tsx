@@ -11,7 +11,7 @@ function JoinInner() {
   const router = useRouter();
   const params = useSearchParams();
   const [supabase] = useState(() => createClient());
-  const codeParam = (params.get("code") ?? "").toUpperCase();
+  const codeParam = (params.get("code") ?? "").replace(/\D/g, "").slice(0, 5);
 
   const [locale, setLocale] = useState<Locale>("it");
   const [code, setCode] = useState(codeParam);
@@ -62,7 +62,7 @@ function JoinInner() {
   }, []);
 
   function manualJoin() {
-    const c = code.trim().toUpperCase();
+    const c = code.replace(/\D/g, "");
     if (c.length < 4) {
       setError(d.enterCode);
       return;
@@ -84,13 +84,13 @@ function JoinInner() {
         <h1 className="font-display text-4xl text-white">{d.joinTitle}</h1>
         <p className="text-ink-soft">{d.joinSubtitle}</p>
         <input
-          className="h-16 w-full rounded-blob border-2 border-line bg-white text-center font-display text-3xl tracking-[0.3em] text-ink-dark uppercase placeholder:text-ink-dark/30 focus:border-magenta focus:outline-none"
-          placeholder="ABCDE"
+          className="h-16 w-full rounded-blob border-2 border-line bg-white text-center font-display text-4xl tracking-[0.3em] text-ink-dark placeholder:text-ink-dark/30 focus:border-magenta focus:outline-none"
+          placeholder="12345"
           maxLength={5}
-          autoCapitalize="characters"
+          inputMode="numeric"
           autoComplete="off"
           value={code}
-          onChange={(e) => setCode(e.target.value.toUpperCase())}
+          onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 5))}
           onKeyDown={(e) => e.key === "Enter" && manualJoin()}
         />
         <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={manualJoin}>

@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { getDict } from "@/lib/i18n";
 import type { Deck, Locale } from "@/lib/types";
 
 interface DeckCardProps {
@@ -12,7 +11,6 @@ interface DeckCardProps {
 
 /** Rettangolo mazzo: nome + descrizione + intensità 🌶️ (selezionabile dal master). */
 export function DeckCard({ deck, selected, onToggle, disabled, locale = "it" }: DeckCardProps) {
-  const d = getDict(locale);
   return (
     <button
       type="button"
@@ -35,9 +33,6 @@ export function DeckCard({ deck, selected, onToggle, disabled, locale = "it" }: 
         </span>
       </div>
       <span className="text-sm text-ink-soft">{deck.description[locale]}</span>
-      {deck.min_players <= 2 ? (
-        <span className="text-xs font-bold text-lime">{d.alsoForTwo}</span>
-      ) : null}
     </button>
   );
 }
