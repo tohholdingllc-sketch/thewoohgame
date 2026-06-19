@@ -70,6 +70,8 @@ const it = {
   tapFinish: "Tocca per terminare 🏁",
   masterFlipping: "Il master sta scorrendo le carte…",
   turnOf: (n: string) => `👉 Tocca a ${n}`,
+  exitGame: "Esci dalla partita",
+  menuLabel: "Menu master",
   // card types
   ct_io_non_ho_mai: "Io non ho mai",
   ct_tre_cose: "Le 3 cose",
@@ -142,6 +144,8 @@ const en: typeof it = {
   tapFinish: "Tap to finish 🏁",
   masterFlipping: "The host is flipping the cards…",
   turnOf: (n: string) => `👉 ${n}'s turn`,
+  exitGame: "Leave the game",
+  menuLabel: "Host menu",
   ct_io_non_ho_mai: "Never have I ever",
   ct_tre_cose: "3 things",
   ct_sinonimi: "Synonyms",

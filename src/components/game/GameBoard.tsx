@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { MasterMenu } from "@/components/MasterMenu";
 import { wolfSrc, wolfForIndex } from "@/lib/wolves";
 import { cardTypeMeta, substituteTargets, type CardRow, type Target } from "@/lib/cards";
 import { getDict, cardTypeLabel } from "@/lib/i18n";
@@ -158,6 +159,15 @@ export function GameBoard({
     >
       {infoButton}
       {infoOverlay}
+      {isMaster ? (
+        <MasterMenu
+          label={d.menuLabel}
+          actions={[
+            { icon: "🔄", label: d.playAgain, onClick: () => void onRestart() },
+            { icon: "🚪", label: d.exitGame, onClick: onExit, danger: true },
+          ]}
+        />
+      ) : null}
 
       {turn ? (
         <div

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DeckCard } from "@/components/DeckCard";
 import { GameBoard } from "@/components/game/GameBoard";
+import { MasterMenu } from "@/components/MasterMenu";
 import { QRCodeSVG } from "qrcode.react";
 import { getDict } from "@/lib/i18n";
 import type { CardRow } from "@/lib/cards";
@@ -154,7 +155,13 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   }
 
   return (
-    <main className="flex-1 flex flex-col items-center px-5 py-7 pad-safe-t pad-safe-b">
+    <main className="relative flex-1 flex flex-col items-center px-5 py-7 pad-safe-t pad-safe-b">
+      {isMaster ? (
+        <MasterMenu
+          label={d.menuLabel}
+          actions={[{ icon: "🚪", label: d.exitGame, onClick: () => void leaveLobby(), danger: true }]}
+        />
+      ) : null}
       <div className="flex w-full max-w-xl flex-col gap-6">
         <div className="flex flex-col items-center gap-2 rounded-blob border-2 border-line bg-surface/50 p-5">
           <span className="text-sm uppercase tracking-widest text-ink-soft">{d.gameCode}</span>
