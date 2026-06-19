@@ -44,9 +44,10 @@ workflows:
     max_build_duration: 60
     environment:
       node: 22
+      android_signing:
+        - woohgame_upload   # nome del keystore caricato in Codemagic (Code signing > Android)
       groups:
         - supabase
-        - google_play   # CM_KEYSTORE_PATH, CM_KEYSTORE_PASSWORD, CM_KEY_ALIAS, CM_KEY_PASSWORD
     scripts:
       - name: Install deps
         script: npm ci
