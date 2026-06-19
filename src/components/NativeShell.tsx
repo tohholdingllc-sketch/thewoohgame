@@ -17,11 +17,16 @@ export function NativeShell() {
       const { Capacitor } = await import("@capacitor/core");
       if (!Capacitor.isNativePlatform()) return;
 
+      // Marca l'app nativa: abilita il padding safe-area minimo (vedi globals.css),
+      // perché Android non riporta env(safe-area-inset-*) e il contenuto finirebbe
+      // sotto status bar / barra di navigazione.
+      document.documentElement.classList.add("native");
+
       try {
         const { StatusBar, Style } = await import("@capacitor/status-bar");
         await StatusBar.setStyle({ style: Style.Light });
         if (Capacitor.getPlatform() === "android") {
-          await StatusBar.setBackgroundColor({ color: "#8a27d6" });
+          await StatusBar.setBackgroundColor({ color: "#0a0716" });
         }
       } catch {}
 
