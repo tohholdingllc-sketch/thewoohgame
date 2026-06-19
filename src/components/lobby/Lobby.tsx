@@ -155,7 +155,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   }
 
   return (
-    <main className="relative flex-1 flex flex-col items-center px-5 py-7 pad-safe-t pad-safe-b">
+    <main className="relative flex-1 flex flex-col items-center px-5 pt-14 pb-10 pad-safe-t pad-safe-b">
       {isMaster ? (
         <MasterMenu
           label={d.menuLabel}
