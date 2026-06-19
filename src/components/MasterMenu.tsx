@@ -25,7 +25,7 @@ export function MasterMenu({ actions, label = "Menu" }: { actions: MenuAction[];
           e.stopPropagation();
           setOpen(true);
         }}
-        className="absolute left-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full border-2 border-line bg-surface/80 text-lg text-white backdrop-blur"
+        className="top-safe absolute left-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full border-2 border-line bg-surface/80 text-lg text-white backdrop-blur"
       >
         ☰
       </button>

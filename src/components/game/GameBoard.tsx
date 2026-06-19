@@ -73,7 +73,7 @@ export function GameBoard({
         setShowInfo((s) => !s);
       }}
       aria-label={d.infoLabel}
-      className="absolute right-4 top-4 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 font-serif text-sm italic text-white/40"
+      className="top-safe absolute right-4 top-4 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 font-serif text-sm italic text-white/40"
     >
       i
     </button>

@@ -92,10 +92,15 @@
    minimo per status bar (top) e barra di navigazione (bottom). iOS usa l'inset reale
    quando è maggiore (notch). La classe "native" è aggiunta da NativeShell. */
 .native .pad-safe-t {
-  padding-top: max(env(safe-area-inset-top), 28px);
+  padding-top: max(env(safe-area-inset-top), 48px);
 }
 .native .pad-safe-b {
   padding-bottom: max(env(safe-area-inset-bottom), 20px);
+}
+/* Elementi posizionati in alto in modo assoluto (menu ☰, info "i"): su nativo
+   vanno spostati sotto la status bar (il padding del contenitore non li tocca). */
+.native .top-safe {
+  top: max(env(safe-area-inset-top), 48px);
 }
 
 /* Animazioni di gioco */
