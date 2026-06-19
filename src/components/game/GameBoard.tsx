@@ -144,6 +144,7 @@ export function GameBoard({
   const emoji = cardTypeMeta(card.type).emoji;
   const targets = (game.current_targets ?? []) as Target[];
   const text = substituteTargets(card.text[locale] ?? card.text.it, targets);
+  const turn = targets[0];
   const rule = (game.active_rules?.[0] as I18n | undefined) ?? undefined;
   const isWooh = card.type === "wooh";
   const lastCard = idx + 1 >= len;
@@ -157,6 +158,18 @@ export function GameBoard({
     >
       {infoButton}
       {infoOverlay}
+
+      {turn ? (
+        <div
+          className="mx-auto mb-3 flex items-center gap-2 rounded-full border-2 px-5 py-1.5 text-center text-sm font-bold text-white"
+          style={{
+            borderColor: turn.nickname_color ?? "#ff5da2",
+            backgroundColor: `${turn.nickname_color ?? "#ff5da2"}26`,
+          }}
+        >
+          {d.turnOf(turn.nickname)}
+        </div>
+      ) : null}
 
       {rule ? (
         <div className="mx-auto mb-3 max-w-md rounded-full border-2 border-violet bg-violet/20 px-4 py-1.5 text-center text-sm text-white">

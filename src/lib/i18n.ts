@@ -69,6 +69,7 @@ const it = {
   tapNext: "Tocca lo schermo per la prossima carta",
   tapFinish: "Tocca per terminare 🏁",
   masterFlipping: "Il master sta scorrendo le carte…",
+  turnOf: (n: string) => `👉 Tocca a ${n}`,
   // card types
   ct_io_non_ho_mai: "Io non ho mai",
   ct_tre_cose: "Le 3 cose",
@@ -140,6 +141,7 @@ const en: typeof it = {
   tapNext: "Tap the screen for the next card",
   tapFinish: "Tap to finish 🏁",
   masterFlipping: "The host is flipping the cards…",
+  turnOf: (n: string) => `👉 ${n}'s turn`,
   ct_io_non_ho_mai: "Never have I ever",
   ct_tre_cose: "3 things",
   ct_sinonimi: "Synonyms",
