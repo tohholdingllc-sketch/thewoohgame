@@ -5,14 +5,27 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { createClient } from "@/lib/supabase/client";
 
-/**
- * Azioni della schermata di scelta. Crea/Entra portano alla lobby (Fase 2);
- * per ora mostrano un avviso. Include il logout.
- */
+/** Schermata di scelta: crea una partita (RPC) o vai a inserire un codice. */
 export function PlayActions() {
   const router = useRouter();
   const [supabase] = useState(() => createClient());
-  const [note, setNote] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function createGame() {
+    setBusy(true);
+    setError(null);
+    const { data, error } = await supabase.rpc("create_game", {
+      p_decks: [],
+      p_language: "it",
+    });
+    if (error) {
+      setError(error.message);
+      setBusy(false);
+      return;
+    }
+    router.push(`/game/${data}`);
+  }
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -22,23 +35,23 @@ export function PlayActions() {
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-4">
-      <Button
-        variant="yellow"
-        size="lg"
-        className="w-full"
-        onClick={() => setNote("La lobby arriva nella Fase 2 🚧")}
-      >
+      <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={createGame}>
         🎉 Crea una partita
       </Button>
       <Button
         variant="cyan"
         size="lg"
         className="w-full"
-        onClick={() => setNote("La lobby arriva nella Fase 2 🚧")}
+        disabled={busy}
+        onClick={() => router.push("/join")}
       >
         🔑 Entra con codice
       </Button>
-      {note ? <p className="text-sm text-ink-soft">{note}</p> : null}
+      {error ? (
+        <p className="rounded-xl bg-magenta/15 px-4 py-2 text-center text-sm text-white">
+          {error}
+        </p>
+      ) : null}
       <button
         type="button"
         onClick={signOut}

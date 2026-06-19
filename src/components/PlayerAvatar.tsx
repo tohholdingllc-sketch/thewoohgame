@@ -1,5 +1,6 @@
 import { avatarById } from "@/lib/avatars";
 import { cn } from "@/lib/utils";
+import { WoohEmoji } from "@/components/WoohEmoji";
 
 interface PlayerAvatarProps {
   avatarId?: string | null;
@@ -37,7 +38,9 @@ export function PlayerAvatar({
           fontSize: Math.round(size * 0.52),
         }}
       >
-        {a.img ? (
+        {a.wooh ? (
+          <WoohEmoji variant={a.wooh} size={size} title={a.label} />
+        ) : a.img ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={a.img} alt={a.label} className="h-full w-full object-cover" />
         ) : (

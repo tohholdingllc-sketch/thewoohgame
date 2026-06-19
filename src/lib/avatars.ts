@@ -1,16 +1,23 @@
+import type { WoohVariant } from "@/components/WoohEmoji";
+
 /**
- * Set di avatar predefiniti. Baseline a emoji (zero peso, offline, sempre nitidi);
- * `img` opzionale per sostituirli con illustrazioni custom (es. generate con
- * Higgsfield) senza cambiare l'API: basta aggiungere il path PNG in /public/avatars.
+ * Set di avatar predefiniti.
+ * - Le 4 facce "WOOH" (vettoriali, brand) in cima.
+ * - Poi emoji unicode (zero peso, offline). `img` opzionale per immagini custom.
  */
 export type Avatar = {
   id: string;
-  emoji: string;
   label: string;
+  wooh?: WoohVariant;
+  emoji?: string;
   img?: string;
 };
 
 export const AVATARS: Avatar[] = [
+  { id: "wooh", label: "Wooh", wooh: "wooh" },
+  { id: "wooh-love", label: "Innamorato", wooh: "love" },
+  { id: "wooh-money", label: "Vincita", wooh: "money" },
+  { id: "wooh-drunk", label: "Sbronzo", wooh: "drunk" },
   { id: "party", emoji: "🥳", label: "Festaiolo" },
   { id: "cool", emoji: "😎", label: "Figo" },
   { id: "unicorn", emoji: "🦄", label: "Unicorno" },

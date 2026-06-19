@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { AgeGate } from "@/components/auth/AgeGate";
 import { AVATARS } from "@/lib/avatars";
+import { WoohEmoji } from "@/components/WoohEmoji";
 import { NICKNAME_COLORS } from "@/lib/brand";
 
 const AGE_KEY = "wooh_age_ok";
@@ -109,6 +110,11 @@ export function AuthScreen() {
       <div className="flex w-full max-w-md flex-1 flex-col items-center gap-7">
         {/* Wordmark (logo a pennello: bianco con bordo arancione) */}
         <div className="flex flex-col items-center leading-none">
+          <WoohEmoji
+            variant="wooh"
+            size={72}
+            className="mb-3 drop-shadow-[0_6px_0_rgba(0,0,0,0.18)]"
+          />
           <span className="font-display text-base tracking-[0.3em] text-white/90">THE</span>
           <h1
             className="font-display text-7xl text-white"
