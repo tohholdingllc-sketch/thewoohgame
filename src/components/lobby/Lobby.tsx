@@ -10,6 +10,7 @@ import { GameBoard } from "@/components/game/GameBoard";
 import { MasterMenu } from "@/components/MasterMenu";
 import { QRCodeSVG } from "qrcode.react";
 import { getDict } from "@/lib/i18n";
+import { BRAND } from "@/lib/brand";
 import type { CardRow } from "@/lib/cards";
 import type { Deck, Game, GamePlayer, Locale } from "@/lib/types";
 
@@ -35,8 +36,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   const isMaster = game.master_id === userId;
   const selected = game.selected_decks ?? [];
   const queueLen = (game.card_queue ?? []).length;
-  const inviteUrl =
-    typeof window !== "undefined" ? `${window.location.origin}/join?code=${game.code}` : "";
+  const inviteUrl = `${BRAND.url}/join?code=${game.code}`;
 
   const refetchPlayers = useCallback(async () => {
     const { data } = await supabase
@@ -122,8 +122,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   }
 
   function copyInvite() {
-    const url = `${location.origin}/join?code=${game.code}`;
-    void navigator.clipboard?.writeText(url);
+    void navigator.clipboard?.writeText(inviteUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 1800);
   }

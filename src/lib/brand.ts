@@ -3,7 +3,10 @@ export const BRAND = {
   name: "The WOOH Game",
   shortName: "WOOH",
   tagline: "Una partita. Tutti col proprio telefono.",
-  themeColor: "#8a27d6",
+  themeColor: "#0a0716",
+  // Dominio canonico: usato per i link di invito condivisi (nell'app nativa
+  // window.location.origin sarebbe localhost → il link sarebbe inutilizzabile).
+  url: "https://thewoohgame.com",
 } as const;
 
 /** Palette accenti come valori JS (per avatar, colori nickname, grafici, ecc.). */
