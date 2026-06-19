@@ -6,7 +6,9 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/Button";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DeckCard } from "@/components/DeckCard";
-import type { Deck, Game, GamePlayer } from "@/lib/types";
+import { GameBoard } from "@/components/game/GameBoard";
+import type { CardRow } from "@/lib/cards";
+import type { Deck, Game, GamePlayer, Locale } from "@/lib/types";
 
 interface LobbyProps {
   initialGame: Game;
@@ -20,12 +22,14 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
   const [supabase] = useState(() => createClient());
   const [game, setGame] = useState<Game>(initialGame);
   const [players, setPlayers] = useState<GamePlayer[]>(initialPlayers);
+  const [cardsById, setCardsById] = useState<Record<string, CardRow>>({});
   const [manualName, setManualName] = useState("");
   const [copied, setCopied] = useState(false);
-  const [note, setNote] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const isMaster = game.master_id === userId;
   const selected = game.selected_decks ?? [];
+  const locale: Locale = game.language === "en" ? "en" : "it";
 
   const refetchPlayers = useCallback(async () => {
     const { data } = await supabase
@@ -36,7 +40,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
     if (data) setPlayers(data as GamePlayer[]);
   }, [supabase, game.id]);
 
-  // Realtime: giocatori che entrano/escono + aggiornamenti partita
+  // Realtime: giocatori + stato partita (avanzamento carte, regole, ecc.)
   useEffect(() => {
     const channel = supabase
       .channel(`game-${game.id}`)
@@ -58,6 +62,28 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
       void supabase.removeChannel(channel);
     };
   }, [supabase, game.id, refetchPlayers]);
+
+  // Carica i dati delle carte quando la partita parte
+  useEffect(() => {
+    if (game.status === "lobby") return;
+    const ids = game.card_queue ?? [];
+    if (ids.length === 0) return;
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("cards")
+        .select("id,type,text,param,is_persistent,needs_target")
+        .in("id", ids);
+      if (active && data) {
+        const map: Record<string, CardRow> = {};
+        for (const c of data as CardRow[]) map[c.id] = c;
+        setCardsById(map);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, [supabase, game.status, (game.card_queue ?? []).length]);
 
   async function toggleDeck(id: string) {
     if (!isMaster) return;
@@ -85,12 +111,38 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
     setTimeout(() => setCopied(false), 1800);
   }
 
-  function startGame() {
-    // Il motore di gioco (mischiata carte + sincronizzazione) arriva nella Fase 3.
-    setNote("🚧 Il motore di gioco arriva nella Fase 3.");
-  }
+  const start = useCallback(async () => {
+    setError(null);
+    const { error } = await supabase.rpc("start_game", { p_game_id: game.id });
+    if (error) {
+      setError(
+        error.message.includes("NO_CARDS")
+          ? "Nessuna carta per questi mazzi col numero di giocatori attuale."
+          : error.message,
+      );
+    }
+  }, [supabase, game.id]);
+
+  const advance = useCallback(async () => {
+    await supabase.rpc("advance_card", { p_game_id: game.id });
+  }, [supabase, game.id]);
 
   const canStart = isMaster && players.length >= 2 && selected.length >= 1;
+
+  // Partita in gioco o finita → tavolo
+  if (game.status !== "lobby") {
+    return (
+      <GameBoard
+        game={game}
+        cardsById={cardsById}
+        isMaster={isMaster}
+        onAdvance={advance}
+        onRestart={start}
+        onExit={() => router.push("/play")}
+        locale={locale}
+      />
+    );
+  }
 
   return (
     <main className="flex-1 flex flex-col items-center px-5 py-7 pad-safe-t pad-safe-b">
@@ -128,7 +180,6 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
 
         {isMaster ? (
           <>
-            {/* Aggiungi giocatore manuale */}
             <div className="flex gap-2">
               <input
                 className="h-12 flex-1 rounded-2xl border-2 border-line bg-white px-4 font-semibold text-ink-dark placeholder:text-ink-dark/40 focus:border-magenta focus:outline-none"
@@ -143,7 +194,6 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
               </Button>
             </div>
 
-            {/* Selezione mazzi */}
             <section>
               <h2 className="mb-3 font-display text-xl text-white">Scegli i mazzi</h2>
               <div className="grid gap-3">
@@ -153,19 +203,18 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
                     deck={d}
                     selected={selected.includes(d.id)}
                     onToggle={() => toggleDeck(d.id)}
+                    locale={locale}
                   />
                 ))}
               </div>
             </section>
 
-            {/* Avvio */}
-            <Button variant="magenta" size="lg" className="w-full" disabled={!canStart} onClick={startGame}>
+            <Button variant="magenta" size="lg" className="w-full" disabled={!canStart} onClick={start}>
               {canStart ? "🚀 Inizia partita" : "Servono 2+ giocatori e 1 mazzo"}
             </Button>
-            {note ? <p className="text-center text-sm text-ink-soft">{note}</p> : null}
+            {error ? <p className="text-center text-sm text-magenta">{error}</p> : null}
           </>
         ) : (
-          /* Vista ospite */
           <div className="flex flex-col items-center gap-4 py-6 text-center">
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-line border-t-yellow" />
             <p className="max-w-xs text-ink-soft">
@@ -173,11 +222,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId }: LobbyProps
             </p>
             {selected.length > 0 ? (
               <p className="text-sm text-ink-faint">
-                Mazzi scelti:{" "}
-                {decks
-                  .filter((d) => selected.includes(d.id))
-                  .map((d) => d.name.it)
-                  .join(", ")}
+                Mazzi: {decks.filter((d) => selected.includes(d.id)).map((d) => d.name[locale]).join(", ")}
               </p>
             ) : null}
           </div>

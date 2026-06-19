@@ -34,6 +34,7 @@ export interface Game {
   current_card_index: number;
   card_queue: string[];
   active_rules: unknown[];
+  current_targets: unknown[];
   language: string;
   created_at: string;
 }

@@ -5,6 +5,7 @@ interface WoohEmojiProps {
   size?: number;
   className?: string;
   title?: string;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -20,6 +21,7 @@ export function WoohEmoji({
   size = 64,
   className,
   title = "Emoji WOOH",
+  style,
 }: WoohEmojiProps) {
   return (
     <svg
@@ -27,6 +29,7 @@ export function WoohEmoji({
       height={size}
       viewBox="0 0 100 100"
       className={className}
+      style={style}
       role="img"
       aria-label={title}
       xmlns="http://www.w3.org/2000/svg"
