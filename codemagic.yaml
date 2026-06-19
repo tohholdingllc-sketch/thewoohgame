@@ -12,7 +12,7 @@
 workflows:
   android-debug:
     name: WOOH — Android APK (test)
-    instance_type: linux_x2
+    instance_type: mac_mini_m1
     max_build_duration: 60
     environment:
       node: 20
@@ -36,7 +36,7 @@ workflows:
 
   android-release:
     name: WOOH — Android AAB (Play Store)
-    instance_type: linux_x2
+    instance_type: mac_mini_m1
     max_build_duration: 60
     environment:
       node: 20
@@ -61,7 +61,7 @@ workflows:
 
   ios:
     name: WOOH — iOS (App Store / TestFlight)
-    instance_type: mac_mini_m2
+    instance_type: mac_mini_m1
     max_build_duration: 90
     integrations:
       app_store_connect: codemagic   # nome dell'API key configurata in Codemagic
