@@ -3,6 +3,7 @@ import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { PwaRegister } from "@/components/PwaRegister";
+import { NativeShell } from "@/components/NativeShell";
 
 // Font display (logo/titoli): tondo e bold, vibe Gartic Phone.
 // NOTA: il brief vuole il font "Lou"; quando avremo il .woff2 lo passiamo a
@@ -51,6 +52,7 @@ export default function RootLayout({
     >
       <body className="min-h-dvh flex flex-col">
         <PwaRegister />
+        <NativeShell />
         {children}
       </body>
     </html>
