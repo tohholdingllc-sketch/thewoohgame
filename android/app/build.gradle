@@ -7,7 +7,11 @@ android {
         applicationId "com.thewoohgame.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        // versionCode automatico: su Codemagic usa BUILD_NUMBER (cresce a ogni build) + 10 di base,
+        // così sta sempre sopra le versioni già caricate ed è unico e crescente.
+        // In locale (senza CI) resta 1. -> niente più errore "codice versione già usato".
+        def ciBuild = System.getenv("BUILD_NUMBER")
+        versionCode ciBuild ? ciBuild.toInteger() + 10 : 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
