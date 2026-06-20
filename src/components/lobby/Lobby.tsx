@@ -10,6 +10,7 @@ import { GameBoard } from "@/components/game/GameBoard";
 import { MasterMenu } from "@/components/MasterMenu";
 import { QRCodeSVG } from "qrcode.react";
 import { getDict } from "@/lib/i18n";
+import { isNicknameClean } from "@/lib/profanity";
 import { BRAND } from "@/lib/brand";
 import type { CardRow } from "@/lib/cards";
 import type { Deck, Game, GamePlayer, Locale } from "@/lib/types";
@@ -112,6 +113,10 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   async function addManual() {
     const n = manualName.trim();
     if (!n) return;
+    if (!isNicknameClean(n)) {
+      setError(d.nickBadWord);
+      return;
+    }
     setManualName("");
     await supabase.rpc("add_manual_player", {
       p_game_id: game.id,

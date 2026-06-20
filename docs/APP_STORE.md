@@ -77,3 +77,25 @@ Nel questionario rispondi onestamente:
 
 ## Build
 - Arriva da **Codemagic** (workflow `ios`) → caricata su **TestFlight** → poi la selezioni nella scheda prima dell'invio.
+
+## Posizionamento (mitiga il rifiuto 4.3 "drinking game low-quality", giu 2026)
+- Posiziona come **party game multiplayer**, NON come "app per bere". Il bere è **opzionale**.
+- Keyword/testi: punta su *party, festa, amici, multiplayer, carte*; evita di centrare tutto su *drinking/alcol*.
+
+## Note per il revisore (App Review Information → Notes) — copia-incolla
+```
+The WOOH Game is a multiplayer party game, not a generic drinking-game card list.
+Differentiators: real-time multiplayer (each player on their own phone, joining via a
+numeric room code), 300 hand-written cards across 5 themed decks, turn rotation with
+personalized prompts, and a polished custom UI. Drinking is entirely optional — the in-app
+18+ age gate, the responsible-play disclaimer, and the card copy make clear that "WOOH"
+sips can be any drink, alcoholic or not. We do not encourage excessive consumption or
+target minors. To review the full experience without an account, tap "Play as guest".
+```
+
+## Compliance implementata (giugno 2026)
+- ✅ **Sign in with Apple** accanto a Google (Guideline 4.8) — *richiede la config Apple+Supabase prima dell'invio*.
+- ✅ **Cancellazione account in-app** (schermata iniziale → "Elimina account") (5.1.1(v)).
+- ✅ **Age gate 18+** + disclaimer "bevi responsabilmente / anche analcolico".
+- ✅ **Filtro nickname** sui nomi inseriti dagli utenti (1.2); il master può anche espellere (block).
+- ⏳ Nessun acquisto in-app ora (3.1.1 N/A). Se in futuro Streap/abbonamento a pagamento su iOS → **obbligatorio Apple IAP**.

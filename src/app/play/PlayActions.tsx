@@ -33,6 +33,19 @@ export function PlayActions({ locale = "it" }: { locale?: Locale }) {
     window.location.assign("/");
   }
 
+  async function deleteAccount() {
+    if (!window.confirm(d.deleteAccountConfirm)) return;
+    setBusy(true);
+    const { error } = await supabase.rpc("delete_my_account");
+    if (error) {
+      setError(d.deleteAccountErr);
+      setBusy(false);
+      return;
+    }
+    await supabase.auth.signOut();
+    window.location.assign("/");
+  }
+
   return (
     <div className="flex w-full max-w-sm flex-col gap-4">
       <Button variant="magenta" size="lg" className="w-full" disabled={busy} onClick={createGame}>
@@ -60,6 +73,14 @@ export function PlayActions({ locale = "it" }: { locale?: Locale }) {
         </button>
         <LocaleToggle locale={locale} />
       </div>
+      <button
+        type="button"
+        onClick={deleteAccount}
+        disabled={busy}
+        className="mx-auto mt-1 text-xs text-ink-faint underline underline-offset-4 disabled:opacity-50"
+      >
+        {d.deleteAccount}
+      </button>
     </div>
   );
 }

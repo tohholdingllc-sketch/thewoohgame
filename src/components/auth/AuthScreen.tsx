@@ -10,6 +10,7 @@ import { EmojiBackground } from "@/components/EmojiBackground";
 import { AVATARS, avatarById } from "@/lib/avatars";
 import { NICKNAME_COLORS } from "@/lib/brand";
 import { friendlyAuthError, getDict } from "@/lib/i18n";
+import { isNicknameClean } from "@/lib/profanity";
 import type { Locale } from "@/lib/types";
 
 const AGE_KEY = "wooh_age_ok";
@@ -75,6 +76,10 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
 
   async function playAsGuest() {
     setError(null);
+    if (!isNicknameClean(nickname)) {
+      showError(d.nickBadWord);
+      return;
+    }
     setBusy(true);
     const { error } = await supabase.auth.signInAnonymously({ options: { data: meta() } });
     done(error);
@@ -84,6 +89,10 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
     setError(null);
     if (!email.trim() || !password) {
       showError(d.errFillFields);
+      return;
+    }
+    if (!isNicknameClean(nickname)) {
+      showError(d.nickBadWord);
       return;
     }
     setBusy(true);
@@ -101,6 +110,16 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
     setBusy(true);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: { redirectTo: `${location.origin}/auth/callback` },
+    });
+    if (error) showError(friendlyAuthError(d, error.message));
+  }
+
+  async function withApple() {
+    setError(null);
+    setBusy(true);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "apple",
       options: { redirectTo: `${location.origin}/auth/callback` },
     });
     if (error) showError(friendlyAuthError(d, error.message));
@@ -236,6 +255,18 @@ export function AuthScreen({ locale = "it", nextJoin }: { locale?: Locale; nextJ
               <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
             </svg>
             <span>{d.continueGoogle}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={withApple}
+            disabled={busy}
+            className="flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-black px-4 font-bold text-white disabled:opacity-50"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="shrink-0">
+              <path d="M17.05 12.04c-.03-2.78 2.27-4.11 2.37-4.18-1.29-1.89-3.3-2.15-4.01-2.18-1.71-.17-3.33 1-4.19 1-.86 0-2.19-.98-3.6-.95-1.85.03-3.56 1.07-4.51 2.72-1.92 3.33-.49 8.26 1.38 10.96.91 1.32 2 2.8 3.42 2.75 1.37-.05 1.89-.88 3.55-.88 1.65 0 2.12.88 3.57.85 1.47-.02 2.41-1.34 3.31-2.67 1.04-1.53 1.47-3.01 1.5-3.09-.03-.01-2.88-1.1-2.91-4.36zM14.28 4.16c.76-.92 1.27-2.2 1.13-3.47-1.09.04-2.41.72-3.19 1.64-.7.81-1.31 2.11-1.15 3.35 1.21.09 2.45-.61 3.21-1.52z"/>
+            </svg>
+            <span>{d.continueApple}</span>
           </button>
         </div>
 
