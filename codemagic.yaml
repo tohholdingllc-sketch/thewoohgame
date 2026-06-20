@@ -90,10 +90,11 @@ workflows:
             "$NEXT_PUBLIC_SUPABASE_URL" "$NEXT_PUBLIC_SUPABASE_ANON_KEY" > .env.local
       - name: Build web (export statico)
         script: npm run build
-      - name: Aggiungi iOS + sync + pods
+      - name: Aggiungi iOS + icone + sync + pods
         script: |
           npx cap add ios || true
           npx cap sync ios
+          npx capacitor-assets generate --ios
           cd ios/App && pod install
       - name: Set signing + build IPA
         script: |
@@ -102,3 +103,7 @@ workflows:
           xcode-project build-ipa --workspace App.xcworkspace --scheme App
     artifacts:
       - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
