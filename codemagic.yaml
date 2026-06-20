@@ -80,7 +80,7 @@ workflows:
         - supabase
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.woohgame.app
+        bundle_identifier: com.thewoohgame.app
     scripts:
       - name: Install deps
         script: npm ci

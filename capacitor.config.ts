@@ -7,7 +7,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
   configurato, quindi i link di invito condivisi restano sempre browser-first.
 */
 const config: CapacitorConfig = {
-  appId: "com.woohgame.app",
+  appId: "com.thewoohgame.app",
   appName: "The WOOH Game",
   webDir: "out",
   backgroundColor: "#0a0716",
