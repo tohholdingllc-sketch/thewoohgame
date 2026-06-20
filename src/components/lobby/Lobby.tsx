@@ -61,7 +61,8 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
       .on(
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "games", filter: `id=eq.${game.id}` },
-        (payload) => setGame(payload.new as Game),
+        // MERGE (non replace): un payload realtime parziale non deve azzerare card_queue ecc.
+        (payload) => setGame((g) => ({ ...g, ...(payload.new as Partial<Game>) })),
       )
       .subscribe();
 

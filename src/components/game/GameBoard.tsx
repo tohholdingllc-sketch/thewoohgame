@@ -31,8 +31,8 @@ export function GameBoard({
   const [showInfo, setShowInfo] = useState(false);
   const d = getDict(locale);
 
-  const len = game.card_queue.length;
-  const idx = game.current_card_index;
+  const len = game.card_queue?.length ?? 0;
+  const idx = game.current_card_index ?? 0;
   const ended = game.status === "ended" || idx >= len;
 
   const doAdvance = useCallback(async () => {
@@ -58,7 +58,7 @@ export function GameBoard({
   // parte dopo che l'utente ha già interagito con la pagina).
   useEffect(() => {
     if (ended) return;
-    const current = cardsById[game.card_queue[idx]];
+    const current = cardsById[game.card_queue?.[idx] ?? ""];
     if (current?.type !== "wooh") return;
     const audio = new Audio("/sounds/wooh.mp3");
     audio.volume = 0.7;
@@ -133,7 +133,7 @@ export function GameBoard({
     );
   }
 
-  const card = cardsById[game.card_queue[idx]];
+  const card = cardsById[game.card_queue?.[idx] ?? ""];
   if (!card) {
     return (
       <main className="flex-1 flex items-center justify-center">
@@ -144,7 +144,7 @@ export function GameBoard({
 
   const emoji = cardTypeMeta(card.type).emoji;
   const targets = (game.current_targets ?? []) as Target[];
-  const text = substituteTargets(card.text[locale] ?? card.text.it, targets);
+  const text = substituteTargets(card.text?.[locale] ?? card.text?.it ?? card.text?.en ?? "", targets);
   const turn = targets[0];
   const rule = (game.active_rules?.[0] as I18n | undefined) ?? undefined;
   const isWooh = card.type === "wooh";

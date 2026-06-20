@@ -34,6 +34,7 @@ export function cardTypeMeta(type: string) {
 
 /** Sostituisce {player} / {player2} con i nomi dei giocatori estratti. */
 export function substituteTargets(text: string, targets: Target[]): string {
+  if (typeof text !== "string") return "";
   return text
     .replaceAll("{player}", targets[0]?.nickname ?? "qualcuno")
     .replaceAll("{player2}", targets[1]?.nickname ?? "un altro");
