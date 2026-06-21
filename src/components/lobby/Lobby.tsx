@@ -256,7 +256,7 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
             <p className="max-w-xs text-ink-soft">{d.waitMaster}</p>
             {selected.length > 0 ? (
               <p className="text-sm text-ink-faint">
-                {d.decksLabel}: {decks.filter((x) => selected.includes(x.id)).map((x) => x.name[locale]).join(", ")}
+                {d.decksLabel}: {decks.filter((x) => selected.includes(x.id)).map((x) => x.name?.[locale] ?? x.name?.it ?? "").filter(Boolean).join(", ")}
               </p>
             ) : null}
           </div>

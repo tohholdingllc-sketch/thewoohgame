@@ -60,9 +60,11 @@ export function GameBoard({
     if (ended) return;
     const current = cardsById[game.card_queue?.[idx] ?? ""];
     if (current?.type !== "wooh") return;
-    const audio = new Audio("/sounds/wooh.mp3");
-    audio.volume = 0.7;
-    audio.play().catch(() => {});
+    try {
+      const audio = new Audio("/sounds/wooh.mp3");
+      audio.volume = 0.7;
+      audio.play().catch(() => {});
+    } catch {}
   }, [idx, ended, cardsById, game.card_queue]);
 
   const infoButton = (
@@ -149,6 +151,8 @@ export function GameBoard({
   const rule = (game.active_rules?.[0] as I18n | undefined) ?? undefined;
   const isWooh = card.type === "wooh";
   const lastCard = idx + 1 >= len;
+  // penalty robusto: .repeat() lancia RangeError su NaN/negativi/non-interi.
+  const pen = Number.isFinite(card.penalty) ? Math.max(0, Math.trunc(card.penalty)) : 1;
 
   return (
     <main
@@ -184,7 +188,7 @@ export function GameBoard({
 
       {rule ? (
         <div className="mx-auto mb-3 max-w-md rounded-full border-2 border-violet bg-violet/20 px-4 py-1.5 text-center text-sm text-white">
-          📜 {rule[locale] ?? rule.it}
+          📜 {rule[locale] ?? rule.it ?? ""}
         </div>
       ) : null}
 
@@ -235,8 +239,8 @@ export function GameBoard({
           className="flex items-center gap-2 rounded-full border-2 border-orange/60 bg-orange/10 px-4 py-2"
           style={{ boxShadow: "0 0 14px rgba(255,138,61,0.40)" }}
         >
-          <span className="text-xl" aria-hidden="true">{"🔥".repeat(Math.max(1, card.penalty))}</span>
-          <span className="font-display text-lg text-white">{card.penalty} WOOH</span>
+          <span className="text-xl" aria-hidden="true">{"🔥".repeat(Math.max(1, pen))}</span>
+          <span className="font-display text-lg text-white">{pen} WOOH</span>
           <span className="text-xs text-ink-faint">{d.woohIfSkip}</span>
         </div>
         {isMaster ? (

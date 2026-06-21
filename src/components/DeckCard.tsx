@@ -26,13 +26,13 @@ export function DeckCard({ deck, selected, onToggle, disabled, locale = "it" }: 
       )}
     >
       <div className="flex w-full items-center justify-between gap-2">
-        <span className="font-display text-lg text-ink">{deck.name[locale]}</span>
+        <span className="font-display text-lg text-ink">{deck.name?.[locale] ?? deck.name?.it ?? deck.slug}</span>
         <span className="shrink-0 text-sm">
           {"🌶️".repeat(deck.intensity)}
           {deck.is_premium ? " 🔒" : ""}
         </span>
       </div>
-      <span className="text-sm text-ink-soft">{deck.description[locale]}</span>
+      <span className="text-sm text-ink-soft">{deck.description?.[locale] ?? deck.description?.it ?? ""}</span>
     </button>
   );
 }
