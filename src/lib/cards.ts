@@ -35,7 +35,14 @@ export function cardTypeMeta(type: string) {
 /** Sostituisce {player} / {player2} con i nomi dei giocatori estratti. */
 export function substituteTargets(text: string, targets: Target[]): string {
   if (typeof text !== "string") return "";
-  return text
-    .replaceAll("{player}", targets[0]?.nickname ?? "qualcuno")
-    .replaceAll("{player2}", targets[1]?.nickname ?? "un altro");
+  const actor = targets[0]?.nickname ?? "qualcuno";
+  const other1 = targets[1]?.nickname ?? "un altro";
+  const other2 = targets[2]?.nickname ?? other1;
+  // Il giocatore di turno (mostrato in alto sulla carta) è l'ATTORE.
+  // Se la carta INIZIA con "{player}," → {player} = l'attore (es. "{player}, fai...").
+  // Altrimenti {player} è il BERSAGLIO = un ALTRO giocatore (es. "Sussurra a {player}").
+  const addressesActor = text.trimStart().startsWith("{player}");
+  const p1 = addressesActor ? actor : other1;
+  const p2 = addressesActor ? other1 : other2;
+  return text.replaceAll("{player2}", p2).replaceAll("{player}", p1);
 }

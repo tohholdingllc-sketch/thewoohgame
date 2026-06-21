@@ -102,7 +102,11 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
   }
 
   async function kickPlayer(playerId: string) {
-    await supabase.from("game_players").delete().eq("id", playerId);
+    // Ottimistico: rimuovi subito dalla UI (l'evento realtime DELETE con filtro
+    // non sempre arriva). Se il delete fallisce, ripristina con un refetch.
+    setPlayers((ps) => ps.filter((p) => p.id !== playerId));
+    const { error } = await supabase.from("game_players").delete().eq("id", playerId);
+    if (error) void refetchPlayers();
   }
 
   async function leaveLobby() {
