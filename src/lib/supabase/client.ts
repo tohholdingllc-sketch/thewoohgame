@@ -1,14 +1,28 @@
-import { createBrowserClient } from "@supabase/ssr";
+import { createClient as createSupabaseClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
  * Client Supabase lato browser (Client Components).
- * Usa la anon key: tutto è protetto da Row Level Security.
- * La sessione persiste via cookie (~400gg rolling, gestito da @supabase/ssr):
- * resti loggato finché usi l'app, su web e nativo.
+ * Sessione in **localStorage** (default di supabase-js nel browser): funziona sia su web
+ * sia nel WebView nativo (Capacitor). I COOKIE di `@supabase/ssr` NON persistono in modo
+ * affidabile su iOS/Android (scheme capacitor://) → l'app restava bloccata sul login.
+ * Qui non c'è SSR (export statico), quindi localStorage è la scelta corretta.
+ * Singleton per evitare istanze GoTrue multiple. Tutto protetto da Row Level Security.
  */
-export function createClient() {
-  return createBrowserClient(
+let client: SupabaseClient | undefined;
+
+export function createClient(): SupabaseClient {
+  if (client) return client;
+  client = createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        flowType: "pkce",
+      },
+    },
   );
+  return client;
 }
