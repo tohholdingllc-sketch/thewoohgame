@@ -71,7 +71,7 @@ workflows:
     instance_type: mac_mini_m1
     max_build_duration: 90
     integrations:
-      app_store_connect: codemagic   # nome dell'API key configurata in Codemagic
+      app_store_connect: "TOH HOLDING LLC"   # deve combaciare col NOME della key in Codemagic (Apple Developer Portal)
     environment:
       node: 22
       xcode: latest
