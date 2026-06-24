@@ -95,6 +95,8 @@ workflows:
           npx cap add ios || true
           npx cap sync ios
           npx capacitor-assets generate --ios
+          # Schema custom per il ritorno OAuth (Apple/Google) deep-link
+          plutil -insert CFBundleURLTypes -json '[{"CFBundleURLSchemes":["com.thewoohgame.app"]}]' ios/App/App/Info.plist || true
           cd ios/App && pod install
       - name: Set signing + build IPA
         script: |

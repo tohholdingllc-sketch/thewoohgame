@@ -37,12 +37,35 @@ export function NativeShell() {
 
       try {
         const { App } = await import("@capacitor/app");
-        const sub = await App.addListener("backButton", ({ canGoBack }) => {
+        const subBack = await App.addListener("backButton", ({ canGoBack }) => {
           if (canGoBack) window.history.back();
           else App.exitApp();
         });
+        // Ritorno OAuth (Apple/Google) via deep-link com.thewoohgame.app://login-callback
+        const subUrl = await App.addListener("appUrlOpen", async ({ url }) => {
+          if (!url.includes("login-callback")) return;
+          try {
+            const { createClient } = await import("@/lib/supabase/client");
+            const supabase = createClient();
+            const code = new URL(url).searchParams.get("code");
+            if (code) {
+              await supabase.auth.exchangeCodeForSession(code);
+            } else {
+              const hp = new URLSearchParams(url.split("#")[1] ?? "");
+              const at = hp.get("access_token");
+              const rt = hp.get("refresh_token");
+              if (at && rt) await supabase.auth.setSession({ access_token: at, refresh_token: rt });
+            }
+          } catch {}
+          try {
+            const { Browser } = await import("@capacitor/browser");
+            await Browser.close();
+          } catch {}
+          window.location.assign("/play");
+        });
         cleanup = () => {
-          void sub.remove();
+          void subBack.remove();
+          void subUrl.remove();
         };
       } catch {}
     })();
