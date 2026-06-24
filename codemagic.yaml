@@ -95,6 +95,8 @@ workflows:
           plutil -insert CFBundleURLTypes -json '[{"CFBundleURLSchemes":["com.thewoohgame.app"]}]' ios/App/App/Info.plist || true
           # Crittografia: solo HTTPS standard → esente, così App Store non chiede la documentazione
           plutil -insert ITSAppUsesNonExemptEncryption -bool NO ios/App/App/Info.plist || true
+          # Build number = contatore Codemagic ($BUILD_NUMBER): App Store rifiuta CFBundleVersion duplicati
+          plutil -replace CFBundleVersion -string "${BUILD_NUMBER:-2}" ios/App/App/Info.plist || true
       - name: Firma (crea cert+profilo) + build IPA
         script: |
           keychain initialize
