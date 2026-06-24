@@ -148,3 +148,28 @@
     transform: translateY(-12px);
   }
 }
+
+/* /download — carte spicy: su mobile swipe orizzontale, da ≥640px ventaglio */
+@media (min-width: 640px) {
+  .spicy-fan {
+    justify-content: center;
+    gap: 0;
+    overflow: visible;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .spicy-fan > * {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+  .spicy-fan > :first-child {
+    transform: rotate(-6deg);
+  }
+  .spicy-fan > :last-child {
+    transform: rotate(6deg);
+  }
+  .spicy-fan > :hover {
+    transform: translateY(-12px) scale(1.05);
+    z-index: 10;
+  }
+}

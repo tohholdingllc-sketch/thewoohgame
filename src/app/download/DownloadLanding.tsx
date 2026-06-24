@@ -16,11 +16,7 @@ const SHOTS = [
 ];
 
 // Carte Spicy reali catturate dall'app — disposte a ventaglio.
-const SPICY = [
-  { src: "/store/spicy-1.png", rot: "-7deg" },
-  { src: "/store/spicy-2.png", rot: "0deg" },
-  { src: "/store/spicy-3.png", rot: "7deg" },
-];
+const SPICY = ["/store/spicy-1.png", "/store/spicy-2.png", "/store/spicy-3.png"];
 
 const AVATARS = [
   "fox", "cat", "dog", "panda", "bear", "lion", "tiger", "koala", "penguin", "owl",
@@ -83,21 +79,14 @@ export function DownloadLanding() {
         </header>
 
         {/* Hero */}
-        <section className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-6 pt-8 text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/brand/logo-app.png"
-            alt="Icona The WOOH Game"
-            style={{ animation: "float-y 5s ease-in-out infinite" }}
-            className="h-24 w-24 rounded-[1.5rem] shadow-card"
-          />
+        <section className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-6 pt-6 text-center">
           <span
             style={{ ...up(0), animation: "float-y 4s ease-in-out infinite" }}
             className="rounded-full border border-line bg-surface/60 px-4 py-1.5 text-sm text-ink-soft backdrop-blur"
           >
             🐺 Il party game da fare in compagnia · 18+
           </span>
-          <h1 style={up(0.05)} className="font-display text-5xl leading-[1.05] text-white sm:text-7xl">
+          <h1 style={up(0.05)} className="font-display text-4xl leading-[1.08] text-white sm:text-7xl">
             Scarica <span className="text-yellow">The WOOH Game</span>
           </h1>
           <p style={up(0.12)} className="max-w-xl text-lg text-ink-soft sm:text-xl">
@@ -175,7 +164,7 @@ export function DownloadLanding() {
         </section>
 
         {/* ── SEZIONE NUOVA 1: un assaggio delle carte Spicy ── */}
-        <section className="mx-auto mt-28 w-full max-w-5xl px-6 text-center">
+        <section className="mx-auto mt-20 sm:mt-28 w-full max-w-5xl px-6 text-center">
           <span className="inline-block rounded-full border-2 border-orange/60 bg-orange/10 px-4 py-1 font-display text-sm uppercase tracking-widest text-orange">
             🌶️ Mazzo Spicy
           </span>
@@ -187,17 +176,17 @@ export function DownloadLanding() {
             E occhio: <span className="text-orange">queste sono le soft</span>.
           </p>
 
-          {/* Ventaglio di carte reali */}
-          <div className="mt-12 flex items-center justify-center">
-            {SPICY.map((c, i) => (
+          {/* Mobile: swipe orizzontale · Desktop: ventaglio (.spicy-fan in globals.css) */}
+          <div className="spicy-fan mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-2 pb-4 [scrollbar-width:none]">
+            {SPICY.map((src, i) => (
               <div
-                key={c.src}
-                style={{ transform: `rotate(${c.rot})`, zIndex: i === 1 ? 3 : 1 }}
-                className="relative -mx-3 aspect-[9/19] w-[150px] shrink-0 overflow-hidden rounded-[1.8rem] border-4 border-surface bg-surface-2 shadow-card transition-transform duration-300 hover:z-10 hover:-translate-y-3 hover:rotate-0 hover:scale-105 sm:w-[210px]"
+                key={src}
+                style={{ zIndex: i === 1 ? 3 : 1 }}
+                className="relative aspect-[9/19] w-[200px] shrink-0 snap-center overflow-hidden rounded-[1.8rem] border-4 border-surface bg-surface-2 shadow-card transition-transform duration-300 sm:w-[210px]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={c.src}
+                  src={src}
                   alt="Carta Spicy"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
@@ -213,7 +202,7 @@ export function DownloadLanding() {
         </section>
 
         {/* Caratteristiche */}
-        <section className="mx-auto mt-28 grid w-full max-w-4xl grid-cols-1 gap-5 px-6 sm:grid-cols-3">
+        <section className="mx-auto mt-20 sm:mt-28 grid w-full max-w-4xl grid-cols-1 gap-5 px-6 sm:grid-cols-3">
           {FEATURES.map((f) => (
             <div
               key={f.title}
@@ -228,7 +217,7 @@ export function DownloadLanding() {
         </section>
 
         {/* ── SEZIONE NUOVA 2: recensioni della serata ── */}
-        <section className="mx-auto mt-28 w-full max-w-4xl px-6 text-center">
+        <section className="mx-auto mt-20 sm:mt-28 w-full max-w-4xl px-6 text-center">
           <span className="inline-block rounded-full border border-line bg-surface/60 px-4 py-1 font-display text-sm uppercase tracking-widest text-yellow">
             ⭐ Recensioni della serata
           </span>
@@ -253,7 +242,7 @@ export function DownloadLanding() {
         </section>
 
         {/* CTA finale */}
-        <section className="mx-auto mt-28 flex w-full max-w-2xl flex-col items-center gap-5 px-6 text-center">
+        <section className="mx-auto mt-20 sm:mt-28 flex w-full max-w-2xl flex-col items-center gap-5 px-6 text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/brand/wolf-drunk.png"
