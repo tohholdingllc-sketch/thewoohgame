@@ -78,9 +78,6 @@ workflows:
       cocoapods: default
       groups:
         - supabase
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.thewoohgame.app
     scripts:
       - name: Install deps
         script: npm ci
@@ -98,8 +95,11 @@ workflows:
           # Schema custom per il ritorno OAuth (Apple/Google) deep-link
           plutil -insert CFBundleURLTypes -json '[{"CFBundleURLSchemes":["com.thewoohgame.app"]}]' ios/App/App/Info.plist || true
           cd ios/App && pod install
-      - name: Set signing + build IPA
+      - name: Firma (crea cert+profilo) + build IPA
         script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "com.thewoohgame.app" --type IOS_APP_STORE --create
+          keychain add-certificates
           xcode-project use-profiles
           cd ios/App
           xcode-project build-ipa --workspace App.xcworkspace --scheme App
