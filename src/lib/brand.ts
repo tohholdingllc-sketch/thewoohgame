@@ -7,6 +7,11 @@ export const BRAND = {
   // Dominio canonico: usato per i link di invito condivisi (nell'app nativa
   // window.location.origin sarebbe localhost → il link sarebbe inutilizzabile).
   url: "https://thewoohgame.com",
+  // Link agli store (pagina /download).
+  playStore: "https://play.google.com/store/apps/details?id=com.thewoohgame.app",
+  appStore: "", // TODO: https://apps.apple.com/app/idXXXXXXXXX quando l'app è approvata su App Store
+  // Email di assistenza (pagina /contacts + privacy).
+  supportEmail: "tohholdingllc@gmail.com",
 } as const;
 
 /** Palette accenti come valori JS (per avatar, colori nickname, grafici, ecc.). */
