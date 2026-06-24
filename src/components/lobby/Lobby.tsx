@@ -12,7 +12,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { getDict } from "@/lib/i18n";
 import { isNicknameClean } from "@/lib/profanity";
 import { BRAND } from "@/lib/brand";
-import type { CardRow } from "@/lib/cards";
+import type { CardRow, Target } from "@/lib/cards";
 import type { Deck, Game, GamePlayer, Locale } from "@/lib/types";
 
 interface LobbyProps {
@@ -46,6 +46,12 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
       .eq("game_id", game.id)
       .order("joined_at");
     if (data) setPlayers(data as GamePlayer[]);
+  }, [supabase, game.id]);
+
+  // Ripristino dallo stato server (fallback se l'avanzamento ottimistico diverge).
+  const refetchGame = useCallback(async () => {
+    const { data } = await supabase.from("games").select("*").eq("id", game.id).single();
+    if (data) setGame(data as Game);
   }, [supabase, game.id]);
 
   useEffect(() => {
@@ -143,9 +149,31 @@ export function Lobby({ initialGame, initialPlayers, decks, userId, locale }: Lo
     if (error) setError(error.message.includes("NO_CARDS") ? d.noCards : error.message);
   }, [supabase, game.id, d.noCards]);
 
+  // Avanzamento OTTIMISTICO: la rotazione dei target è deterministica (identica a
+  // _wooh_targets sul server: players[indice % n] per ordine d'ingresso), quindi
+  // aggiorniamo SUBITO la carta in locale e sincronizziamo l'RPC in background.
+  // Niente più attesa del round-trip realtime (~1s) sul telefono del master.
   const advance = useCallback(async () => {
-    await supabase.rpc("advance_card", { p_game_id: game.id });
-  }, [supabase, game.id]);
+    setGame((g) => {
+      const len = g.card_queue?.length ?? 0;
+      const next = (g.current_card_index ?? 0) + 1;
+      if (next >= len) return { ...g, current_card_index: len, status: "ended" as const };
+      const n = players.length;
+      const targets: Target[] =
+        n > 0
+          ? [players[next % n], players[(next + 1) % n]].map((p) => ({
+              nickname: p.nickname,
+              nickname_color: p.nickname_color,
+              avatar_id: p.avatar_id,
+            }))
+          : (g.current_targets as Target[]);
+      const nextCard = cardsById[g.card_queue?.[next] ?? ""];
+      const active_rules = nextCard?.type === "regola" ? [nextCard.text] : g.active_rules;
+      return { ...g, current_card_index: next, current_targets: targets, active_rules };
+    });
+    const { error } = await supabase.rpc("advance_card", { p_game_id: game.id });
+    if (error) void refetchGame();
+  }, [supabase, game.id, players, cardsById, refetchGame]);
 
   const canStart = isMaster && players.length >= 2 && selected.length >= 1;
 
