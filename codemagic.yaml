@@ -96,7 +96,9 @@ workflows:
       - name: Firma (crea cert+profilo) + build IPA
         script: |
           keychain initialize
-          app-store-connect fetch-signing-files "com.thewoohgame.app" --type IOS_APP_STORE --create
+          # La chiave privata del certificato arriva in base64 (CERT_KEY_B64) per non rovinare gli a-capo del PEM su CI
+          printf '%s' "$CERT_KEY_B64" | python3 -c "import sys,base64; open('/tmp/cert_key.pem','wb').write(base64.b64decode(sys.stdin.read()))"
+          app-store-connect fetch-signing-files "com.thewoohgame.app" --type IOS_APP_STORE --certificate-key @file:/tmp/cert_key.pem --create
           keychain add-certificates
           xcode-project use-profiles
           cd ios/App
