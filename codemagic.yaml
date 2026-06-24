@@ -75,7 +75,6 @@ workflows:
     environment:
       node: 22
       xcode: latest
-      cocoapods: default
       groups:
         - supabase
     scripts:
@@ -87,14 +86,13 @@ workflows:
             "$NEXT_PUBLIC_SUPABASE_URL" "$NEXT_PUBLIC_SUPABASE_ANON_KEY" > .env.local
       - name: Build web (export statico)
         script: npm run build
-      - name: Aggiungi iOS + icone + sync + pods
+      - name: Aggiungi iOS + icone + sync (Capacitor 8 = SPM, niente Podfile)
         script: |
-          npx cap add ios || true
+          npx cap add ios
           npx cap sync ios
           npx capacitor-assets generate --ios
           # Schema custom per il ritorno OAuth (Apple/Google) deep-link
           plutil -insert CFBundleURLTypes -json '[{"CFBundleURLSchemes":["com.thewoohgame.app"]}]' ios/App/App/Info.plist || true
-          cd ios/App && pod install
       - name: Firma (crea cert+profilo) + build IPA
         script: |
           keychain initialize
@@ -102,7 +100,7 @@ workflows:
           keychain add-certificates
           xcode-project use-profiles
           cd ios/App
-          xcode-project build-ipa --workspace App.xcworkspace --scheme App
+          xcode-project build-ipa --project App.xcodeproj --scheme App
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
