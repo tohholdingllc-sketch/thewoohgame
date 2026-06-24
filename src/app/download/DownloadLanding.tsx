@@ -11,9 +11,9 @@ import { BRAND } from "@/lib/brand";
  */
 
 const SHOTS = [
-  { label: "Crea o entra con un codice", accent: "var(--color-cyan)" },
-  { label: "A ogni turno esce una carta", accent: "var(--color-magenta)" },
-  { label: "Si gioca tutti insieme", accent: "var(--color-yellow)" },
+  { label: "Scegli avatar e nickname", accent: "var(--color-magenta)" },
+  { label: "Crea una partita o entra con un codice", accent: "var(--color-cyan)" },
+  { label: "Invita gli amici col QR e si parte", accent: "var(--color-yellow)" },
 ];
 
 const FEATURES = [
