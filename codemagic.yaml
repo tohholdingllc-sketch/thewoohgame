@@ -104,6 +104,8 @@ workflows:
           cd ios/App
           xcode-project build-ipa --project App.xcodeproj --scheme App
     artifacts:
+      # build-ipa gira dentro ios/App (cd) → l'IPA è qui; la root è solo fallback.
+      - ios/App/build/ios/ipa/*.ipa
       - build/ios/ipa/*.ipa
     publishing:
       app_store_connect:

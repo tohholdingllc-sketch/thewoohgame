@@ -22,6 +22,11 @@ const SPICY = [
   { src: "/store/spicy-3.png", rot: "7deg" },
 ];
 
+const AVATARS = [
+  "fox", "cat", "dog", "panda", "bear", "lion", "tiger", "koala", "penguin", "owl",
+  "frog", "monkey", "raccoon", "unicorn", "dragon", "alien", "robot", "ghost", "llama",
+];
+
 const FEATURES = [
   {
     emoji: "📱",
@@ -68,8 +73,9 @@ export function DownloadLanding() {
       <div className="relative">
         {/* Top bar */}
         <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5">
-          <Link href="/" className="font-display text-2xl font-bold text-white">
-            WOOH
+          <Link href="/" className="transition active:scale-95">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/logo.png" alt="The WOOH Game" className="h-9 w-auto" />
           </Link>
           <Link href="/" className="text-sm text-ink-soft underline-offset-4 hover:underline">
             Gioca sul web
@@ -78,6 +84,13 @@ export function DownloadLanding() {
 
         {/* Hero */}
         <section className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-6 pt-8 text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo-app.png"
+            alt="Icona The WOOH Game"
+            style={{ animation: "float-y 5s ease-in-out infinite" }}
+            className="h-24 w-24 rounded-[1.5rem] shadow-card"
+          />
           <span
             style={{ ...up(0), animation: "float-y 4s ease-in-out infinite" }}
             className="rounded-full border border-line bg-surface/60 px-4 py-1.5 text-sm text-ink-soft backdrop-blur"
@@ -141,6 +154,24 @@ export function DownloadLanding() {
               <p className="text-center text-sm text-ink-faint">{s.label}</p>
             </div>
           ))}
+        </section>
+
+        {/* Avatar */}
+        <section className="mx-auto mt-20 w-full max-w-3xl px-6 text-center">
+          <h2 className="font-display text-2xl text-white sm:text-3xl">Scegli chi essere stasera</h2>
+          <p className="mt-2 text-sm text-ink-soft">19 avatar, zero scuse.</p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {AVATARS.map((a, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={a}
+                src={`/avatars/${a}.png`}
+                alt={a}
+                style={{ animationDelay: `${i * 0.04}s` }}
+                className="h-12 w-12 rounded-full ring-2 ring-line transition-transform hover:scale-125 hover:-translate-y-1"
+              />
+            ))}
+          </div>
         </section>
 
         {/* ── SEZIONE NUOVA 1: un assaggio delle carte Spicy ── */}
@@ -223,6 +254,13 @@ export function DownloadLanding() {
 
         {/* CTA finale */}
         <section className="mx-auto mt-28 flex w-full max-w-2xl flex-col items-center gap-5 px-6 text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/wolf-drunk.png"
+            alt="Lupo WOOH"
+            style={{ animation: "float-y 4s ease-in-out infinite" }}
+            className="h-44 w-auto drop-shadow-[0_12px_30px_rgba(255,93,162,0.35)]"
+          />
           <h2 className="font-display text-4xl leading-tight text-white sm:text-5xl">
             Pronto a rovinare qualche amicizia?
           </h2>
