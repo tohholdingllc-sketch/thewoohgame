@@ -115,7 +115,7 @@ export function DownloadLanding() {
             )}
           </div>
           <p style={up(0.26)} className="text-sm text-lime">
-            ✓ Già live su Android · 📱 iOS in arrivo
+            ✓ Già live su App Store e Google Play
           </p>
         </section>
 

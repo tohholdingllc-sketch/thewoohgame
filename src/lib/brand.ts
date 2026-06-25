@@ -9,7 +9,7 @@ export const BRAND = {
   url: "https://thewoohgame.com",
   // Link agli store (pagina /download).
   playStore: "https://play.google.com/store/apps/details?id=com.thewoohgame.app",
-  appStore: "", // TODO: https://apps.apple.com/app/idXXXXXXXXX quando l'app è approvata su App Store
+  appStore: "https://apps.apple.com/app/id6783741283", // The WOOH Game — live su App Store (link region-less: redirige allo store locale)
   // Email di assistenza (pagina /contacts + privacy).
   supportEmail: "tohholdingllc@gmail.com",
 } as const;
